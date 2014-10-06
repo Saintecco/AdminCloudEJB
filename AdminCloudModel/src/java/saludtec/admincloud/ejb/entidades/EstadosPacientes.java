@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,27 +31,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "como_supo")
+@Table(name = "estados_pacientes")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ComoSupo.findAll", query = "SELECT c FROM ComoSupo c"),
-    @NamedQuery(name = "ComoSupo.findByIdComoSupo", query = "SELECT c FROM ComoSupo c WHERE c.idComoSupo = :idComoSupo"),
-    @NamedQuery(name = "ComoSupo.findByComoSupo", query = "SELECT c FROM ComoSupo c WHERE c.comoSupo = :comoSupo"),
-    @NamedQuery(name = "ComoSupo.findByFechaCreacion", query = "SELECT c FROM ComoSupo c WHERE c.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "ComoSupo.findByUltimaEdicion", query = "SELECT c FROM ComoSupo c WHERE c.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "ComoSupo.findByEstado", query = "SELECT c FROM ComoSupo c WHERE c.estado = :estado")})
-public class ComoSupo implements Serializable {
+    @NamedQuery(name = "EstadosPacientes.findAll", query = "SELECT e FROM EstadosPacientes e"),
+    @NamedQuery(name = "EstadosPacientes.findByIdEstadosPacientes", query = "SELECT e FROM EstadosPacientes e WHERE e.idEstadosPacientes = :idEstadosPacientes"),
+    @NamedQuery(name = "EstadosPacientes.findByEstadoPaciente", query = "SELECT e FROM EstadosPacientes e WHERE e.estadoPaciente = :estadoPaciente"),
+    @NamedQuery(name = "EstadosPacientes.findByFechaCreacion", query = "SELECT e FROM EstadosPacientes e WHERE e.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "EstadosPacientes.findByUltimaEdicion", query = "SELECT e FROM EstadosPacientes e WHERE e.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "EstadosPacientes.findByEstado", query = "SELECT e FROM EstadosPacientes e WHERE e.estado = :estado")})
+public class EstadosPacientes implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_como_supo")
-    private Integer idComoSupo;
+    @Column(name = "id_estados_pacientes")
+    private Integer idEstadosPacientes;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
-    @Column(name = "como_supo")
-    private String comoSupo;
+    @Column(name = "estado_paciente")
+    private String estadoPaciente;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -71,35 +71,35 @@ public class ComoSupo implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
 
-    public ComoSupo() {
+    public EstadosPacientes() {
     }
 
-    public ComoSupo(Integer idComoSupo) {
-        this.idComoSupo = idComoSupo;
+    public EstadosPacientes(Integer idEstadosPacientes) {
+        this.idEstadosPacientes = idEstadosPacientes;
     }
 
-    public ComoSupo(Integer idComoSupo, String comoSupo, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idComoSupo = idComoSupo;
-        this.comoSupo = comoSupo;
+    public EstadosPacientes(Integer idEstadosPacientes, String estadoPaciente, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idEstadosPacientes = idEstadosPacientes;
+        this.estadoPaciente = estadoPaciente;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdComoSupo() {
-        return idComoSupo;
+    public Integer getIdEstadosPacientes() {
+        return idEstadosPacientes;
     }
 
-    public void setIdComoSupo(Integer idComoSupo) {
-        this.idComoSupo = idComoSupo;
+    public void setIdEstadosPacientes(Integer idEstadosPacientes) {
+        this.idEstadosPacientes = idEstadosPacientes;
     }
 
-    public String getComoSupo() {
-        return comoSupo;
+    public String getEstadoPaciente() {
+        return estadoPaciente;
     }
 
-    public void setComoSupo(String comoSupo) {
-        this.comoSupo = comoSupo;
+    public void setEstadoPaciente(String estadoPaciente) {
+        this.estadoPaciente = estadoPaciente;
     }
 
     public Date getFechaCreacion() {
@@ -137,18 +137,18 @@ public class ComoSupo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idComoSupo != null ? idComoSupo.hashCode() : 0);
+        hash += (idEstadosPacientes != null ? idEstadosPacientes.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ComoSupo)) {
+        if (!(object instanceof EstadosPacientes)) {
             return false;
         }
-        ComoSupo other = (ComoSupo) object;
-        if ((this.idComoSupo == null && other.idComoSupo != null) || (this.idComoSupo != null && !this.idComoSupo.equals(other.idComoSupo))) {
+        EstadosPacientes other = (EstadosPacientes) object;
+        if ((this.idEstadosPacientes == null && other.idEstadosPacientes != null) || (this.idEstadosPacientes != null && !this.idEstadosPacientes.equals(other.idEstadosPacientes))) {
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public class ComoSupo implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.ComoSupo[ idComoSupo=" + idComoSupo + " ]";
+        return "saludtec.admin_cloud.ejb.entidades.EstadosPacientes[ idEstadosPacientes=" + idEstadosPacientes + " ]";
     }
     
 }

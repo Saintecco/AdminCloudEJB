@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,31 +31,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "departamentos")
+@Table(name = "como_supo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Departamentos.findAll", query = "SELECT d FROM Departamentos d"),
-    @NamedQuery(name = "Departamentos.findByIdDepartamento", query = "SELECT d FROM Departamentos d WHERE d.idDepartamento = :idDepartamento"),
-    @NamedQuery(name = "Departamentos.findByDepartamento", query = "SELECT d FROM Departamentos d WHERE d.departamento = :departamento"),
-    @NamedQuery(name = "Departamentos.findByCodigo", query = "SELECT d FROM Departamentos d WHERE d.codigo = :codigo"),
-    @NamedQuery(name = "Departamentos.findByFechaCreacion", query = "SELECT d FROM Departamentos d WHERE d.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Departamentos.findByUltimaEdicion", query = "SELECT d FROM Departamentos d WHERE d.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "Departamentos.findByEstado", query = "SELECT d FROM Departamentos d WHERE d.estado = :estado")})
-public class Departamentos implements Serializable {
+    @NamedQuery(name = "ComoSupo.findAll", query = "SELECT c FROM ComoSupo c"),
+    @NamedQuery(name = "ComoSupo.findByIdComoSupo", query = "SELECT c FROM ComoSupo c WHERE c.idComoSupo = :idComoSupo"),
+    @NamedQuery(name = "ComoSupo.findByComoSupo", query = "SELECT c FROM ComoSupo c WHERE c.comoSupo = :comoSupo"),
+    @NamedQuery(name = "ComoSupo.findByFechaCreacion", query = "SELECT c FROM ComoSupo c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "ComoSupo.findByUltimaEdicion", query = "SELECT c FROM ComoSupo c WHERE c.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "ComoSupo.findByEstado", query = "SELECT c FROM ComoSupo c WHERE c.estado = :estado")})
+public class ComoSupo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_departamento")
-    private Integer idDepartamento;
+    @Column(name = "id_como_supo")
+    private Integer idComoSupo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
-    @Column(name = "departamento")
-    private String departamento;
-    @Size(max = 100)
-    @Column(name = "codigo")
-    private String codigo;
+    @Column(name = "como_supo")
+    private String comoSupo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -64,7 +60,7 @@ public class Departamentos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ultima_edicion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
     @Basic(optional = false)
     @NotNull
@@ -75,43 +71,35 @@ public class Departamentos implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
 
-    public Departamentos() {
+    public ComoSupo() {
     }
 
-    public Departamentos(Integer idDepartamento) {
-        this.idDepartamento = idDepartamento;
+    public ComoSupo(Integer idComoSupo) {
+        this.idComoSupo = idComoSupo;
     }
 
-    public Departamentos(Integer idDepartamento, String departamento, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idDepartamento = idDepartamento;
-        this.departamento = departamento;
+    public ComoSupo(Integer idComoSupo, String comoSupo, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idComoSupo = idComoSupo;
+        this.comoSupo = comoSupo;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdDepartamento() {
-        return idDepartamento;
+    public Integer getIdComoSupo() {
+        return idComoSupo;
     }
 
-    public void setIdDepartamento(Integer idDepartamento) {
-        this.idDepartamento = idDepartamento;
+    public void setIdComoSupo(Integer idComoSupo) {
+        this.idComoSupo = idComoSupo;
     }
 
-    public String getDepartamento() {
-        return departamento;
+    public String getComoSupo() {
+        return comoSupo;
     }
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setComoSupo(String comoSupo) {
+        this.comoSupo = comoSupo;
     }
 
     public Date getFechaCreacion() {
@@ -149,18 +137,18 @@ public class Departamentos implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDepartamento != null ? idDepartamento.hashCode() : 0);
+        hash += (idComoSupo != null ? idComoSupo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Departamentos)) {
+        if (!(object instanceof ComoSupo)) {
             return false;
         }
-        Departamentos other = (Departamentos) object;
-        if ((this.idDepartamento == null && other.idDepartamento != null) || (this.idDepartamento != null && !this.idDepartamento.equals(other.idDepartamento))) {
+        ComoSupo other = (ComoSupo) object;
+        if ((this.idComoSupo == null && other.idComoSupo != null) || (this.idComoSupo != null && !this.idComoSupo.equals(other.idComoSupo))) {
             return false;
         }
         return true;
@@ -168,7 +156,7 @@ public class Departamentos implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.Departamentos[ idDepartamento=" + idDepartamento + " ]";
+        return "saludtec.admin_cloud.ejb.entidades.ComoSupo[ idComoSupo=" + idComoSupo + " ]";
     }
     
 }

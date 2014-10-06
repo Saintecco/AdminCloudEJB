@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,29 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "razas")
+@Table(name = "estados_civiles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Razas.findAll", query = "SELECT r FROM Razas r"),
-    @NamedQuery(name = "Razas.findByIdRaza", query = "SELECT r FROM Razas r WHERE r.idRaza = :idRaza"),
-    @NamedQuery(name = "Razas.findByRaza", query = "SELECT r FROM Razas r WHERE r.raza = :raza"),
-    @NamedQuery(name = "Razas.findByFechaCreacion", query = "SELECT r FROM Razas r WHERE r.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Razas.findByUltimaEdicion", query = "SELECT r FROM Razas r WHERE r.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "Razas.findByEstado", query = "SELECT r FROM Razas r WHERE r.estado = :estado")})
-public class Razas implements Serializable {
+    @NamedQuery(name = "EstadosCiviles.findAll", query = "SELECT e FROM EstadosCiviles e"),
+    @NamedQuery(name = "EstadosCiviles.findByIdEstadoCivil", query = "SELECT e FROM EstadosCiviles e WHERE e.idEstadoCivil = :idEstadoCivil"),
+    @NamedQuery(name = "EstadosCiviles.findByEstadoCivil", query = "SELECT e FROM EstadosCiviles e WHERE e.estadoCivil = :estadoCivil"),
+    @NamedQuery(name = "EstadosCiviles.findByFechaCreacion", query = "SELECT e FROM EstadosCiviles e WHERE e.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "EstadosCiviles.findByUltimaEdicion", query = "SELECT e FROM EstadosCiviles e WHERE e.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "EstadosCiviles.findByEstado", query = "SELECT e FROM EstadosCiviles e WHERE e.estado = :estado")})
+public class EstadosCiviles implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_raza")
-    private Integer idRaza;
+    @Column(name = "id_estado_civil")
+    private Integer idEstadoCivil;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
-    @Column(name = "raza")
-    private String raza;
-    @Basic(optional = false)
-    @NotNull
+    @Column(name = "estado_civil")
+    private String estadoCivil;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
@@ -65,35 +63,34 @@ public class Razas implements Serializable {
     @Column(name = "estado")
     private String estado;
 
-    public Razas() {
+    public EstadosCiviles() {
     }
 
-    public Razas(Integer idRaza) {
-        this.idRaza = idRaza;
+    public EstadosCiviles(Integer idEstadoCivil) {
+        this.idEstadoCivil = idEstadoCivil;
     }
 
-    public Razas(Integer idRaza, String raza, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idRaza = idRaza;
-        this.raza = raza;
-        this.fechaCreacion = fechaCreacion;
+    public EstadosCiviles(Integer idEstadoCivil, String estadoCivil, Date ultimaEdicion, String estado) {
+        this.idEstadoCivil = idEstadoCivil;
+        this.estadoCivil = estadoCivil;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdRaza() {
-        return idRaza;
+    public Integer getIdEstadoCivil() {
+        return idEstadoCivil;
     }
 
-    public void setIdRaza(Integer idRaza) {
-        this.idRaza = idRaza;
+    public void setIdEstadoCivil(Integer idEstadoCivil) {
+        this.idEstadoCivil = idEstadoCivil;
     }
 
-    public String getRaza() {
-        return raza;
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setRaza(String raza) {
-        this.raza = raza;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     public Date getFechaCreacion() {
@@ -123,18 +120,18 @@ public class Razas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRaza != null ? idRaza.hashCode() : 0);
+        hash += (idEstadoCivil != null ? idEstadoCivil.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Razas)) {
+        if (!(object instanceof EstadosCiviles)) {
             return false;
         }
-        Razas other = (Razas) object;
-        if ((this.idRaza == null && other.idRaza != null) || (this.idRaza != null && !this.idRaza.equals(other.idRaza))) {
+        EstadosCiviles other = (EstadosCiviles) object;
+        if ((this.idEstadoCivil == null && other.idEstadoCivil != null) || (this.idEstadoCivil != null && !this.idEstadoCivil.equals(other.idEstadoCivil))) {
             return false;
         }
         return true;
@@ -142,7 +139,7 @@ public class Razas implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.Razas[ idRaza=" + idRaza + " ]";
+        return "saludtec.admin_cloud.ejb.entidades.EstadosCiviles[ idEstadoCivil=" + idEstadoCivil + " ]";
     }
     
 }

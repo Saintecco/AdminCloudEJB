@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,35 +31,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "companias_de_seguros")
+@Table(name = "departamentos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CompaniasDeSeguros.findAll", query = "SELECT c FROM CompaniasDeSeguros c"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByIdCompaniaDeSeguros", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.idCompaniaDeSeguros = :idCompaniaDeSeguros"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByCompaniaDeSeguro", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.companiaDeSeguro = :companiaDeSeguro"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByCodigo", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.codigo = :codigo"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByFechaCreacion", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByUltimaEdicion", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByEstado", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.estado = :estado")})
-public class CompaniasDeSeguros implements Serializable {
+    @NamedQuery(name = "Departamentos.findAll", query = "SELECT d FROM Departamentos d"),
+    @NamedQuery(name = "Departamentos.findByIdDepartamento", query = "SELECT d FROM Departamentos d WHERE d.idDepartamento = :idDepartamento"),
+    @NamedQuery(name = "Departamentos.findByDepartamento", query = "SELECT d FROM Departamentos d WHERE d.departamento = :departamento"),
+    @NamedQuery(name = "Departamentos.findByCodigo", query = "SELECT d FROM Departamentos d WHERE d.codigo = :codigo"),
+    @NamedQuery(name = "Departamentos.findByFechaCreacion", query = "SELECT d FROM Departamentos d WHERE d.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "Departamentos.findByUltimaEdicion", query = "SELECT d FROM Departamentos d WHERE d.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "Departamentos.findByEstado", query = "SELECT d FROM Departamentos d WHERE d.estado = :estado")})
+public class Departamentos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_compania_de_seguros")
-    private Integer idCompaniaDeSeguros;
+    @Column(name = "id_departamento")
+    private Integer idDepartamento;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "compania_de_seguro")
-    private String companiaDeSeguro;
-    @Size(max = 500)
+    @Size(min = 1, max = 500)
+    @Column(name = "departamento")
+    private String departamento;
+    @Size(max = 100)
     @Column(name = "codigo")
     private String codigo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Basic(optional = false)
     @NotNull
@@ -75,35 +75,35 @@ public class CompaniasDeSeguros implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
 
-    public CompaniasDeSeguros() {
+    public Departamentos() {
     }
 
-    public CompaniasDeSeguros(Integer idCompaniaDeSeguros) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
+    public Departamentos(Integer idDepartamento) {
+        this.idDepartamento = idDepartamento;
     }
 
-    public CompaniasDeSeguros(Integer idCompaniaDeSeguros, String companiaDeSeguro, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
-        this.companiaDeSeguro = companiaDeSeguro;
+    public Departamentos(Integer idDepartamento, String departamento, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idDepartamento = idDepartamento;
+        this.departamento = departamento;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdCompaniaDeSeguros() {
-        return idCompaniaDeSeguros;
+    public Integer getIdDepartamento() {
+        return idDepartamento;
     }
 
-    public void setIdCompaniaDeSeguros(Integer idCompaniaDeSeguros) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
+    public void setIdDepartamento(Integer idDepartamento) {
+        this.idDepartamento = idDepartamento;
     }
 
-    public String getCompaniaDeSeguro() {
-        return companiaDeSeguro;
+    public String getDepartamento() {
+        return departamento;
     }
 
-    public void setCompaniaDeSeguro(String companiaDeSeguro) {
-        this.companiaDeSeguro = companiaDeSeguro;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
     public String getCodigo() {
@@ -149,18 +149,18 @@ public class CompaniasDeSeguros implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCompaniaDeSeguros != null ? idCompaniaDeSeguros.hashCode() : 0);
+        hash += (idDepartamento != null ? idDepartamento.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompaniasDeSeguros)) {
+        if (!(object instanceof Departamentos)) {
             return false;
         }
-        CompaniasDeSeguros other = (CompaniasDeSeguros) object;
-        if ((this.idCompaniaDeSeguros == null && other.idCompaniaDeSeguros != null) || (this.idCompaniaDeSeguros != null && !this.idCompaniaDeSeguros.equals(other.idCompaniaDeSeguros))) {
+        Departamentos other = (Departamentos) object;
+        if ((this.idDepartamento == null && other.idDepartamento != null) || (this.idDepartamento != null && !this.idDepartamento.equals(other.idDepartamento))) {
             return false;
         }
         return true;
@@ -168,7 +168,7 @@ public class CompaniasDeSeguros implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.CompaniasDeSeguros[ idCompaniaDeSeguros=" + idCompaniaDeSeguros + " ]";
+        return "saludtec.admin_cloud.ejb.entidades.Departamentos[ idDepartamento=" + idDepartamento + " ]";
     }
     
 }

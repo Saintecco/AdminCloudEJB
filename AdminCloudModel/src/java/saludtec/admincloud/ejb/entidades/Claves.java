@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

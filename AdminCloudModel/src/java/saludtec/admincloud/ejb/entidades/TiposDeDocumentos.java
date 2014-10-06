@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package saludtec.admin_cloud.ejb.entidades;
+package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,27 +31,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "tipos_de_vinculacion")
+@Table(name = "tipos_de_documentos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposDeVinculacion.findAll", query = "SELECT t FROM TiposDeVinculacion t"),
-    @NamedQuery(name = "TiposDeVinculacion.findByIdTipoDeVinculacion", query = "SELECT t FROM TiposDeVinculacion t WHERE t.idTipoDeVinculacion = :idTipoDeVinculacion"),
-    @NamedQuery(name = "TiposDeVinculacion.findByTipoDeVinculacion", query = "SELECT t FROM TiposDeVinculacion t WHERE t.tipoDeVinculacion = :tipoDeVinculacion"),
-    @NamedQuery(name = "TiposDeVinculacion.findByFechaCreacion", query = "SELECT t FROM TiposDeVinculacion t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "TiposDeVinculacion.findByUltimaEdicion", query = "SELECT t FROM TiposDeVinculacion t WHERE t.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "TiposDeVinculacion.findByEstado", query = "SELECT t FROM TiposDeVinculacion t WHERE t.estado = :estado")})
-public class TiposDeVinculacion implements Serializable {
+    @NamedQuery(name = "TiposDeDocumentos.findAll", query = "SELECT t FROM TiposDeDocumentos t"),
+    @NamedQuery(name = "TiposDeDocumentos.findByIdTipoDeDocumento", query = "SELECT t FROM TiposDeDocumentos t WHERE t.idTipoDeDocumento = :idTipoDeDocumento"),
+    @NamedQuery(name = "TiposDeDocumentos.findByTipoDeDocumento", query = "SELECT t FROM TiposDeDocumentos t WHERE t.tipoDeDocumento = :tipoDeDocumento"),
+    @NamedQuery(name = "TiposDeDocumentos.findByFechaCreacion", query = "SELECT t FROM TiposDeDocumentos t WHERE t.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "TiposDeDocumentos.findByUltimaEdicion", query = "SELECT t FROM TiposDeDocumentos t WHERE t.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "TiposDeDocumentos.findByEstado", query = "SELECT t FROM TiposDeDocumentos t WHERE t.estado = :estado")})
+public class TiposDeDocumentos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_de_vinculacion")
-    private Integer idTipoDeVinculacion;
+    @Column(name = "id_tipo_de_documento")
+    private Integer idTipoDeDocumento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
-    @Column(name = "tipo_de_vinculacion")
-    private String tipoDeVinculacion;
+    @Column(name = "tipo_de_documento")
+    private String tipoDeDocumento;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -71,35 +71,35 @@ public class TiposDeVinculacion implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
 
-    public TiposDeVinculacion() {
+    public TiposDeDocumentos() {
     }
 
-    public TiposDeVinculacion(Integer idTipoDeVinculacion) {
-        this.idTipoDeVinculacion = idTipoDeVinculacion;
+    public TiposDeDocumentos(Integer idTipoDeDocumento) {
+        this.idTipoDeDocumento = idTipoDeDocumento;
     }
 
-    public TiposDeVinculacion(Integer idTipoDeVinculacion, String tipoDeVinculacion, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idTipoDeVinculacion = idTipoDeVinculacion;
-        this.tipoDeVinculacion = tipoDeVinculacion;
+    public TiposDeDocumentos(Integer idTipoDeDocumento, String tipoDeDocumento, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idTipoDeDocumento = idTipoDeDocumento;
+        this.tipoDeDocumento = tipoDeDocumento;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdTipoDeVinculacion() {
-        return idTipoDeVinculacion;
+    public Integer getIdTipoDeDocumento() {
+        return idTipoDeDocumento;
     }
 
-    public void setIdTipoDeVinculacion(Integer idTipoDeVinculacion) {
-        this.idTipoDeVinculacion = idTipoDeVinculacion;
+    public void setIdTipoDeDocumento(Integer idTipoDeDocumento) {
+        this.idTipoDeDocumento = idTipoDeDocumento;
     }
 
-    public String getTipoDeVinculacion() {
-        return tipoDeVinculacion;
+    public String getTipoDeDocumento() {
+        return tipoDeDocumento;
     }
 
-    public void setTipoDeVinculacion(String tipoDeVinculacion) {
-        this.tipoDeVinculacion = tipoDeVinculacion;
+    public void setTipoDeDocumento(String tipoDeDocumento) {
+        this.tipoDeDocumento = tipoDeDocumento;
     }
 
     public Date getFechaCreacion() {
@@ -137,18 +137,18 @@ public class TiposDeVinculacion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoDeVinculacion != null ? idTipoDeVinculacion.hashCode() : 0);
+        hash += (idTipoDeDocumento != null ? idTipoDeDocumento.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposDeVinculacion)) {
+        if (!(object instanceof TiposDeDocumentos)) {
             return false;
         }
-        TiposDeVinculacion other = (TiposDeVinculacion) object;
-        if ((this.idTipoDeVinculacion == null && other.idTipoDeVinculacion != null) || (this.idTipoDeVinculacion != null && !this.idTipoDeVinculacion.equals(other.idTipoDeVinculacion))) {
+        TiposDeDocumentos other = (TiposDeDocumentos) object;
+        if ((this.idTipoDeDocumento == null && other.idTipoDeDocumento != null) || (this.idTipoDeDocumento != null && !this.idTipoDeDocumento.equals(other.idTipoDeDocumento))) {
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public class TiposDeVinculacion implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.TiposDeVinculacion[ idTipoDeVinculacion=" + idTipoDeVinculacion + " ]";
+        return "saludtec.admin_cloud.ejb.entidades.TiposDeDocumentos[ idTipoDeDocumento=" + idTipoDeDocumento + " ]";
     }
     
 }
