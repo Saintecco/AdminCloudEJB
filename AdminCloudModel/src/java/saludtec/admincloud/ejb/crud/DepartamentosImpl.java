@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -6,19 +11,23 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.TiposDeDocumentos;
+import saludtec.admincloud.ejb.entidades.Departamentos;
 
+/**
+ *
+ * @author saintec
+ */
 @Stateless
-public class TiposDocumentosImpl implements TiposDocumentosEjb {
-
+public class DepartamentosImpl implements DepartamentosEjb {
+    
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public TiposDeDocumentos guardar(TiposDeDocumentos tipoDocumento) {
+    public Departamentos guardar(Departamentos departamento) {
         try {
-            em.persist(tipoDocumento);
-            return tipoDocumento;
+            em.persist(departamento);
+            return departamento;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -26,10 +35,10 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public TiposDeDocumentos editar(TiposDeDocumentos tipoDocumento) {
+    public Departamentos editar(Departamentos departamento) {
         try {
-            em.merge(tipoDocumento);
-            return tipoDocumento;
+            em.merge(departamento);
+            return departamento;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -37,24 +46,24 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public Integer eliminar(Integer idTipoDocumento) {
-        TiposDeDocumentos tipoDocumentos = em.find(TiposDeDocumentos.class, idTipoDocumento);
+    public Integer eliminar(Integer idDepartamento) {
+        Departamentos departamentos = em.find(Departamentos.class, idDepartamento);
         Integer ok = 0;
-        if (tipoDocumentos != null) {
+        if (departamentos != null) {
             try {
-                em.remove(tipoDocumentos);
+                em.remove(departamentos);
                 ok = 200;
             } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+                System.err.println(ex.getMessage());
             }
         }
         return ok;
     }
 
     @Override
-    public TiposDeDocumentos traer(Integer idTipoDocumento) {
+    public Departamentos traer(Integer idDepartamento) {
         try {
-            return em.find(TiposDeDocumentos.class, idTipoDocumento);
+            return em.find(Departamentos.class, idDepartamento);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -62,10 +71,10 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public List<TiposDeDocumentos> listar(Clinicas clinica) {
-        String queryStr = "SELECT t FROM TiposDeDocumentos t "
-                + "WHERE t.idClinica = :idClinica "
-                + "ORDER BY t.tipoDeDocumento";
+    public List<Departamentos> listar(Clinicas clinica) {
+        String queryStr = "SELECT d FROM Departamentos d "
+                + "WHERE d.idClinica = :idClinica "
+                + "ORDER BY d.departamento";
         Query query = em.createQuery(queryStr);
         query.setParameter("idClinica", clinica);
         try {
@@ -74,11 +83,6 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
             System.err.println(ex.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public String listarr() {
-        return "mensaje del ejb";
     }
 
 }

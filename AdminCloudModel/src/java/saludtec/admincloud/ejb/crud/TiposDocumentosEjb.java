@@ -6,6 +6,7 @@
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
+import saludtec.admincloud.ejb.entidades.Clinicas;
 import saludtec.admincloud.ejb.entidades.TiposDeDocumentos;
 
 /**
@@ -18,11 +19,11 @@ public interface TiposDocumentosEjb {
 
     TiposDeDocumentos editar(TiposDeDocumentos tipoDocumento);
 
-    Integer eliminar(TiposDeDocumentos tipoDocumento);
+    Integer eliminar(Integer idTipoDocumento);
 
     TiposDeDocumentos traer(Integer idTipoDocumento);
 
-    List<TiposDeDocumentos> listar(Integer idClinica);
+    List<TiposDeDocumentos> listar(Clinicas clinica);
 
     String listarr();
 
