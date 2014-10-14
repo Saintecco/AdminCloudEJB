@@ -54,6 +54,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clinicas.findByLimiteUsuarios", query = "SELECT c FROM Clinicas c WHERE c.limiteUsuarios = :limiteUsuarios"),
     @NamedQuery(name = "Clinicas.findByFechaLimiteActivo", query = "SELECT c FROM Clinicas c WHERE c.fechaLimiteActivo = :fechaLimiteActivo")})
 public class Clinicas implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<EstratosSociales> estratosSocialesList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -382,6 +384,15 @@ public class Clinicas implements Serializable {
     @Override
     public String toString() {
         return "saludtec.admin_cloud.ejb.entidades.Clinicas[ idClinica=" + idClinica + " ]";
+    }
+
+    @XmlTransient
+    public List<EstratosSociales> getEstratosSocialesList() {
+        return estratosSocialesList;
+    }
+
+    public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
+        this.estratosSocialesList = estratosSocialesList;
     }
     
 }

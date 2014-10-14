@@ -11,9 +11,12 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,8 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EstratosSociales.findByEstratoSocial", query = "SELECT e FROM EstratosSociales e WHERE e.estratoSocial = :estratoSocial"),
     @NamedQuery(name = "EstratosSociales.findByFechaCreacion", query = "SELECT e FROM EstratosSociales e WHERE e.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "EstratosSociales.findByUltimaEdicion", query = "SELECT e FROM EstratosSociales e WHERE e.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "EstratosSociales.findByEstado", query = "SELECT e FROM EstratosSociales e WHERE e.estado = :estado"),
-    @NamedQuery(name = "EstratosSociales.findByIdClinica", query = "SELECT e FROM EstratosSociales e WHERE e.idClinica = :idClinica")})
+    @NamedQuery(name = "EstratosSociales.findByEstado", query = "SELECT e FROM EstratosSociales e WHERE e.estado = :estado")})
 public class EstratosSociales implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,10 +67,9 @@ public class EstratosSociales implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_clinica")
-    private int idClinica;
+    @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Clinicas idClinica;
 
     public EstratosSociales() {
     }
@@ -77,13 +78,12 @@ public class EstratosSociales implements Serializable {
         this.idEstratoSocial = idEstratoSocial;
     }
 
-    public EstratosSociales(Integer idEstratoSocial, String estratoSocial, Date fechaCreacion, Date ultimaEdicion, String estado, int idClinica) {
+    public EstratosSociales(Integer idEstratoSocial, String estratoSocial, Date fechaCreacion, Date ultimaEdicion, String estado) {
         this.idEstratoSocial = idEstratoSocial;
         this.estratoSocial = estratoSocial;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
-        this.idClinica = idClinica;
     }
 
     public Integer getIdEstratoSocial() {
@@ -126,11 +126,11 @@ public class EstratosSociales implements Serializable {
         this.estado = estado;
     }
 
-    public int getIdClinica() {
+    public Clinicas getIdClinica() {
         return idClinica;
     }
 
-    public void setIdClinica(int idClinica) {
+    public void setIdClinica(Clinicas idClinica) {
         this.idClinica = idClinica;
     }
 
@@ -156,7 +156,7 @@ public class EstratosSociales implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.EstratosSociales[ idEstratoSocial=" + idEstratoSocial + " ]";
+        return "saludtec.admincloud.ejb.entidades.EstratosSociales[ idEstratoSocial=" + idEstratoSocial + " ]";
     }
     
 }
