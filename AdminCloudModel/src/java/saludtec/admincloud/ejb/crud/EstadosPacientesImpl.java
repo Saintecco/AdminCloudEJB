@@ -11,23 +11,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.CompaniasDeSeguros;
+import saludtec.admincloud.ejb.entidades.EstadosPacientes;
 
 /**
  *
  * @author saintec
  */
 @Stateless
-public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
+public class EstadosPacientesImpl implements EstadosPacientesEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public CompaniasDeSeguros guardar(CompaniasDeSeguros companiaSeguro) {
+    public EstadosPacientes guardar(EstadosPacientes estadoPaciente) {
         try {
-            em.persist(companiaSeguro);
-            return companiaSeguro;
+            em.persist(estadoPaciente);
+            return estadoPaciente;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -35,10 +35,10 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
     }
 
     @Override
-    public CompaniasDeSeguros editar(CompaniasDeSeguros companiaSeguro) {
+    public EstadosPacientes editar(EstadosPacientes estadoPaciente) {
         try {
-            em.merge(companiaSeguro);
-            return companiaSeguro;
+            em.merge(estadoPaciente);
+            return estadoPaciente;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -46,12 +46,12 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
     }
 
     @Override
-    public Integer eliminar(Integer idCompaniaSeguro) {
-        CompaniasDeSeguros companiaSeguros = em.find(CompaniasDeSeguros.class, idCompaniaSeguro);
+    public Integer eliminar(Integer idEstadoPaciente) {
+        EstadosPacientes estadoPacientes = em.find(EstadosPacientes.class, idEstadoPaciente);
         Integer ok = 0;
-        if (companiaSeguros != null) {
+        if (estadoPacientes != null) {
             try {
-                em.remove(companiaSeguros);
+                em.remove(estadoPacientes);
                 ok = 200;
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
@@ -61,9 +61,9 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
     }
 
     @Override
-    public CompaniasDeSeguros traer(Integer idCompaniaSeguro) {
+    public EstadosPacientes traer(Integer idEstadoPaciente) {
         try {
-            return em.find(CompaniasDeSeguros.class, idCompaniaSeguro);
+            return em.find(EstadosPacientes.class, idEstadoPaciente);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -71,10 +71,10 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
     }
 
     @Override
-    public List<CompaniasDeSeguros> listar(Clinicas clinica) {
-        String queryStr = "SELECT c FROM CompaniasDeSeguros c "
-                + "WHERE c.idClinica = :idClinica "
-                + "ORDER BY c.companiaDeSeguro";
+    public List<EstadosPacientes> listar(Clinicas clinica) {
+        String queryStr = "SELECT e FROM EstadosPacientes e "
+                + "WHERE e.idClinica = :idClinica "
+                + "ORDER BY e.estadoPaciente";
         Query query = em.createQuery(queryStr);
         query.setParameter("idClinica", clinica);
         try {

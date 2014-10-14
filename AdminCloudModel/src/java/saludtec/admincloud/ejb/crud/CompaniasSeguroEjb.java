@@ -6,10 +6,24 @@
 
 package saludtec.admincloud.ejb.crud;
 
+import java.util.List;
+import saludtec.admincloud.ejb.entidades.Clinicas;
+import saludtec.admincloud.ejb.entidades.CompaniasDeSeguros;
+
 /**
  *
  * @author saintec
  */
-public class CompaniasSeguroEjb {
+public interface CompaniasSeguroEjb {
+    
+    CompaniasDeSeguros guardar(CompaniasDeSeguros companiaSeguro);
+
+    CompaniasDeSeguros editar(CompaniasDeSeguros companiaSeguro);
+
+    Integer eliminar(Integer idCompaniaSeguro);
+
+    CompaniasDeSeguros traer(Integer idCompaniaSeguro);
+
+    List<CompaniasDeSeguros> listar(Clinicas clinica);
     
 }
