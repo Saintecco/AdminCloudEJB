@@ -139,7 +139,7 @@ public class EstadosCiviles implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.EstadosCiviles[ idEstadoCivil=" + idEstadoCivil + " ]";
+        return "saludtec.admincloud.ejb.entidades.EstadosCiviles[ idEstadoCivil=" + idEstadoCivil + " ]";
     }
     
 }

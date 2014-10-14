@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadosPacientes.findAll", query = "SELECT e FROM EstadosPacientes e"),
-    @NamedQuery(name = "EstadosPacientes.findByIdEstadosPacientes", query = "SELECT e FROM EstadosPacientes e WHERE e.idEstadosPacientes = :idEstadosPacientes"),
+    @NamedQuery(name = "EstadosPacientes.findByIdEstadoPaciente", query = "SELECT e FROM EstadosPacientes e WHERE e.idEstadoPaciente = :idEstadoPaciente"),
     @NamedQuery(name = "EstadosPacientes.findByEstadoPaciente", query = "SELECT e FROM EstadosPacientes e WHERE e.estadoPaciente = :estadoPaciente"),
     @NamedQuery(name = "EstadosPacientes.findByFechaCreacion", query = "SELECT e FROM EstadosPacientes e WHERE e.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "EstadosPacientes.findByUltimaEdicion", query = "SELECT e FROM EstadosPacientes e WHERE e.ultimaEdicion = :ultimaEdicion"),
@@ -45,8 +45,8 @@ public class EstadosPacientes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_estados_pacientes")
-    private Integer idEstadosPacientes;
+    @Column(name = "id_estado_paciente")
+    private Integer idEstadoPaciente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
@@ -74,24 +74,24 @@ public class EstadosPacientes implements Serializable {
     public EstadosPacientes() {
     }
 
-    public EstadosPacientes(Integer idEstadosPacientes) {
-        this.idEstadosPacientes = idEstadosPacientes;
+    public EstadosPacientes(Integer idEstadoPaciente) {
+        this.idEstadoPaciente = idEstadoPaciente;
     }
 
-    public EstadosPacientes(Integer idEstadosPacientes, String estadoPaciente, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idEstadosPacientes = idEstadosPacientes;
+    public EstadosPacientes(Integer idEstadoPaciente, String estadoPaciente, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idEstadoPaciente = idEstadoPaciente;
         this.estadoPaciente = estadoPaciente;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdEstadosPacientes() {
-        return idEstadosPacientes;
+    public Integer getIdEstadoPaciente() {
+        return idEstadoPaciente;
     }
 
-    public void setIdEstadosPacientes(Integer idEstadosPacientes) {
-        this.idEstadosPacientes = idEstadosPacientes;
+    public void setIdEstadoPaciente(Integer idEstadoPaciente) {
+        this.idEstadoPaciente = idEstadoPaciente;
     }
 
     public String getEstadoPaciente() {
@@ -137,7 +137,7 @@ public class EstadosPacientes implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idEstadosPacientes != null ? idEstadosPacientes.hashCode() : 0);
+        hash += (idEstadoPaciente != null ? idEstadoPaciente.hashCode() : 0);
         return hash;
     }
 
@@ -148,7 +148,7 @@ public class EstadosPacientes implements Serializable {
             return false;
         }
         EstadosPacientes other = (EstadosPacientes) object;
-        if ((this.idEstadosPacientes == null && other.idEstadosPacientes != null) || (this.idEstadosPacientes != null && !this.idEstadosPacientes.equals(other.idEstadosPacientes))) {
+        if ((this.idEstadoPaciente == null && other.idEstadoPaciente != null) || (this.idEstadoPaciente != null && !this.idEstadoPaciente.equals(other.idEstadoPaciente))) {
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public class EstadosPacientes implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.EstadosPacientes[ idEstadosPacientes=" + idEstadosPacientes + " ]";
+        return "saludtec.admincloud.ejb.entidades.EstadosPacientes[ idEstadoPaciente=" + idEstadoPaciente + " ]";
     }
     
 }

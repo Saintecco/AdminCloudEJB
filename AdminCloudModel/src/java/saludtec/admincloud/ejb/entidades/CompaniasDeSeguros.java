@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CompaniasDeSeguros.findAll", query = "SELECT c FROM CompaniasDeSeguros c"),
-    @NamedQuery(name = "CompaniasDeSeguros.findByIdCompaniaDeSeguros", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.idCompaniaDeSeguros = :idCompaniaDeSeguros"),
+    @NamedQuery(name = "CompaniasDeSeguros.findByIdCompaniaDeSeguro", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.idCompaniaDeSeguro = :idCompaniaDeSeguro"),
     @NamedQuery(name = "CompaniasDeSeguros.findByCompaniaDeSeguro", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.companiaDeSeguro = :companiaDeSeguro"),
     @NamedQuery(name = "CompaniasDeSeguros.findByCodigo", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.codigo = :codigo"),
     @NamedQuery(name = "CompaniasDeSeguros.findByFechaCreacion", query = "SELECT c FROM CompaniasDeSeguros c WHERE c.fechaCreacion = :fechaCreacion"),
@@ -46,8 +46,8 @@ public class CompaniasDeSeguros implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_compania_de_seguros")
-    private Integer idCompaniaDeSeguros;
+    @Column(name = "id_compania_de_seguro")
+    private Integer idCompaniaDeSeguro;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -78,24 +78,24 @@ public class CompaniasDeSeguros implements Serializable {
     public CompaniasDeSeguros() {
     }
 
-    public CompaniasDeSeguros(Integer idCompaniaDeSeguros) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
+    public CompaniasDeSeguros(Integer idCompaniaDeSeguro) {
+        this.idCompaniaDeSeguro = idCompaniaDeSeguro;
     }
 
-    public CompaniasDeSeguros(Integer idCompaniaDeSeguros, String companiaDeSeguro, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
+    public CompaniasDeSeguros(Integer idCompaniaDeSeguro, String companiaDeSeguro, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idCompaniaDeSeguro = idCompaniaDeSeguro;
         this.companiaDeSeguro = companiaDeSeguro;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdCompaniaDeSeguros() {
-        return idCompaniaDeSeguros;
+    public Integer getIdCompaniaDeSeguro() {
+        return idCompaniaDeSeguro;
     }
 
-    public void setIdCompaniaDeSeguros(Integer idCompaniaDeSeguros) {
-        this.idCompaniaDeSeguros = idCompaniaDeSeguros;
+    public void setIdCompaniaDeSeguro(Integer idCompaniaDeSeguro) {
+        this.idCompaniaDeSeguro = idCompaniaDeSeguro;
     }
 
     public String getCompaniaDeSeguro() {
@@ -149,7 +149,7 @@ public class CompaniasDeSeguros implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCompaniaDeSeguros != null ? idCompaniaDeSeguros.hashCode() : 0);
+        hash += (idCompaniaDeSeguro != null ? idCompaniaDeSeguro.hashCode() : 0);
         return hash;
     }
 
@@ -160,7 +160,7 @@ public class CompaniasDeSeguros implements Serializable {
             return false;
         }
         CompaniasDeSeguros other = (CompaniasDeSeguros) object;
-        if ((this.idCompaniaDeSeguros == null && other.idCompaniaDeSeguros != null) || (this.idCompaniaDeSeguros != null && !this.idCompaniaDeSeguros.equals(other.idCompaniaDeSeguros))) {
+        if ((this.idCompaniaDeSeguro == null && other.idCompaniaDeSeguro != null) || (this.idCompaniaDeSeguro != null && !this.idCompaniaDeSeguro.equals(other.idCompaniaDeSeguro))) {
             return false;
         }
         return true;
@@ -168,7 +168,7 @@ public class CompaniasDeSeguros implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.CompaniasDeSeguros[ idCompaniaDeSeguros=" + idCompaniaDeSeguros + " ]";
+        return "saludtec.admincloud.ejb.entidades.CompaniasDeSeguros[ idCompaniaDeSeguro=" + idCompaniaDeSeguro + " ]";
     }
     
 }

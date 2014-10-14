@@ -55,6 +55,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clinicas.findByFechaLimiteActivo", query = "SELECT c FROM Clinicas c WHERE c.fechaLimiteActivo = :fechaLimiteActivo")})
 public class Clinicas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ModulosClinicas> modulosClinicasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Perfiles> perfilesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<EstratosSociales> estratosSocialesList;
     private static final long serialVersionUID = 1L;
     @Id
@@ -393,6 +397,24 @@ public class Clinicas implements Serializable {
 
     public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
         this.estratosSocialesList = estratosSocialesList;
+    }
+
+    @XmlTransient
+    public List<ModulosClinicas> getModulosClinicasList() {
+        return modulosClinicasList;
+    }
+
+    public void setModulosClinicasList(List<ModulosClinicas> modulosClinicasList) {
+        this.modulosClinicasList = modulosClinicasList;
+    }
+
+    @XmlTransient
+    public List<Perfiles> getPerfilesList() {
+        return perfilesList;
+    }
+
+    public void setPerfilesList(List<Perfiles> perfilesList) {
+        this.perfilesList = perfilesList;
     }
     
 }

@@ -156,7 +156,7 @@ public class TiposDeVinculacion implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.TiposDeVinculacion[ idTipoDeVinculacion=" + idTipoDeVinculacion + " ]";
+        return "saludtec.admincloud.ejb.entidades.TiposDeVinculacion[ idTipoDeVinculacion=" + idTipoDeVinculacion + " ]";
     }
     
 }

@@ -168,7 +168,7 @@ public class Departamentos implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.Departamentos[ idDepartamento=" + idDepartamento + " ]";
+        return "saludtec.admincloud.ejb.entidades.Departamentos[ idDepartamento=" + idDepartamento + " ]";
     }
     
 }
