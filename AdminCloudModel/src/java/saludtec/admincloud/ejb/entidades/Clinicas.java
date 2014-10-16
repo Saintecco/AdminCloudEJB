@@ -55,6 +55,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clinicas.findByFechaLimiteActivo", query = "SELECT c FROM Clinicas c WHERE c.fechaLimiteActivo = :fechaLimiteActivo")})
 public class Clinicas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ClavesCorreccionFactura> clavesCorreccionFacturaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Procedimientos> procedimientosList;
+    @OneToMany(mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ClavesArqueoDeCaja> clavesArqueoDeCajaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Convenios> conveniosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ClavesCorreccionFactura> clavesCorrecionFacturaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<CategoriasProcedimientos> categoriasProcedimientosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<TiposDeMoneda> tiposDeMonedaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<ModulosClinicas> modulosClinicasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<Perfiles> perfilesList;
@@ -415,6 +429,60 @@ public class Clinicas implements Serializable {
 
     public void setPerfilesList(List<Perfiles> perfilesList) {
         this.perfilesList = perfilesList;
+    }
+
+    @XmlTransient
+    public List<Procedimientos> getProcedimientosList() {
+        return procedimientosList;
+    }
+
+    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
+        this.procedimientosList = procedimientosList;
+    }
+
+    @XmlTransient
+    public List<ClavesArqueoDeCaja> getClavesArqueoDeCajaList() {
+        return clavesArqueoDeCajaList;
+    }
+
+    public void setClavesArqueoDeCajaList(List<ClavesArqueoDeCaja> clavesArqueoDeCajaList) {
+        this.clavesArqueoDeCajaList = clavesArqueoDeCajaList;
+    }
+
+    @XmlTransient
+    public List<Convenios> getConveniosList() {
+        return conveniosList;
+    }
+
+    public void setConveniosList(List<Convenios> conveniosList) {
+        this.conveniosList = conveniosList;
+    }
+
+    @XmlTransient
+    public List<CategoriasProcedimientos> getCategoriasProcedimientosList() {
+        return categoriasProcedimientosList;
+    }
+
+    public void setCategoriasProcedimientosList(List<CategoriasProcedimientos> categoriasProcedimientosList) {
+        this.categoriasProcedimientosList = categoriasProcedimientosList;
+    }
+
+    @XmlTransient
+    public List<TiposDeMoneda> getTiposDeMonedaList() {
+        return tiposDeMonedaList;
+    }
+
+    public void setTiposDeMonedaList(List<TiposDeMoneda> tiposDeMonedaList) {
+        this.tiposDeMonedaList = tiposDeMonedaList;
+    }
+
+    @XmlTransient
+    public List<ClavesCorreccionFactura> getClavesCorreccionFacturaList() {
+        return clavesCorreccionFacturaList;
+    }
+
+    public void setClavesCorreccionFacturaList(List<ClavesCorreccionFactura> clavesCorreccionFacturaList) {
+        this.clavesCorreccionFacturaList = clavesCorreccionFacturaList;
     }
     
 }
