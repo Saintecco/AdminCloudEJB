@@ -10,24 +10,36 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import saludtec.admincloud.ejb.entidades.ClavesArqueoDeCaja;
+import saludtec.admincloud.ejb.entidades.ClavesArqueoDeCaja;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.EstadosPacientes;
+import saludtec.admincloud.ejb.utilidades.UtilidadMD5;
 
 /**
  *
  * @author saintec
  */
 @Stateless
-public class EstadosPacientesImpl implements EstadosPacientesEjb {
+public class ClaveArqueoImpl implements ClaveArqueoEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public EstadosPacientes guardar(EstadosPacientes estadoPaciente) {
+    public ClavesArqueoDeCaja guardar(ClavesArqueoDeCaja claveArqueo) {
         try {
-            em.persist(estadoPaciente);
-            return estadoPaciente;
+            em.persist(claveArqueo);
+            return claveArqueo;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public ClavesArqueoDeCaja editar(ClavesArqueoDeCaja claveArqueo) {
+        try {
+            em.merge(claveArqueo);
+            return claveArqueo;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -35,23 +47,12 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public EstadosPacientes editar(EstadosPacientes estadoPaciente) {
-        try {
-            em.merge(estadoPaciente);
-            return estadoPaciente;
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-            return null;
-        }
-    }
-
-    @Override
-    public Integer eliminar(Integer idEstadoPaciente) {
+    public Integer eliminar(Integer idClaveArqueo) {
         Integer ok = 0;
         try {
-            EstadosPacientes estadoPacientes = em.find(EstadosPacientes.class, idEstadoPaciente);
-            if (estadoPacientes != null) {
-                em.remove(estadoPacientes);
+            ClavesArqueoDeCaja claveArqueos = em.find(ClavesArqueoDeCaja.class, idClaveArqueo);
+            if (claveArqueos != null) {
+                em.remove(claveArqueos);
                 ok = 200;
             }
         } catch (Exception ex) {
@@ -61,9 +62,9 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public EstadosPacientes traer(Integer idEstadoPaciente) {
+    public ClavesArqueoDeCaja traer(Integer idClaveArqueo) {
         try {
-            return em.find(EstadosPacientes.class, idEstadoPaciente);
+            return em.find(ClavesArqueoDeCaja.class, idClaveArqueo);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -71,14 +72,16 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public List<EstadosPacientes> listar(Clinicas clinica) {
+    public ClavesArqueoDeCaja traer(String claveArqueo, Clinicas clinica) {
         try {
-            String queryStr = "SELECT e FROM EstadosPacientes e "
-                    + "WHERE e.idClinica = :idClinica "
-                    + "ORDER BY e.estadoPaciente";
+            String queryStr = "SELECT c FROM ClavesArqueoDeCaja c "
+                    + "WHERE c.claveArqueoDeCaja = :clave "
+                    + "AND c.idClinica = :idClinica ";
             Query query = em.createQuery(queryStr);
+            query.setParameter("clave", UtilidadMD5.encriptar(claveArqueo));
             query.setParameter("idClinica", clinica);
-            return query.getResultList();
+            List<ClavesArqueoDeCaja> cac = query.getResultList();
+            return cac.get(0);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;

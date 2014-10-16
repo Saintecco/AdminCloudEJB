@@ -46,15 +46,15 @@ public class TiposVinculacionImpl implements TiposVinculacionEjb {
 
     @Override
     public Integer eliminar(Integer idTipoVinculacion) {
-        TiposDeVinculacion tipoVinculacions = em.find(TiposDeVinculacion.class, idTipoVinculacion);
         Integer ok = 0;
-        if (tipoVinculacions != null) {
-            try {
+        try {
+            TiposDeVinculacion tipoVinculacions = em.find(TiposDeVinculacion.class, idTipoVinculacion);
+            if (tipoVinculacions != null) {
                 em.remove(tipoVinculacions);
                 ok = 200;
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         return ok;
     }
@@ -71,12 +71,12 @@ public class TiposVinculacionImpl implements TiposVinculacionEjb {
 
     @Override
     public List<TiposDeVinculacion> listar(Clinicas clinica) {
-        String queryStr = "SELECT t FROM TiposDeVinculacion t "
-                + "WHERE t.idClinica = :idClinica "
-                + "ORDER BY t.tipoDeVinculacion";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
         try {
+            String queryStr = "SELECT t FROM TiposDeVinculacion t "
+                    + "WHERE t.idClinica = :idClinica "
+                    + "ORDER BY t.tipoDeVinculacion";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

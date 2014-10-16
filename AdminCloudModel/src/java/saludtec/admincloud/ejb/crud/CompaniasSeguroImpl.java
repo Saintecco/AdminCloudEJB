@@ -47,15 +47,15 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
 
     @Override
     public Integer eliminar(Integer idCompaniaSeguro) {
-        CompaniasDeSeguros companiaSeguros = em.find(CompaniasDeSeguros.class, idCompaniaSeguro);
         Integer ok = 0;
-        if (companiaSeguros != null) {
-            try {
+        try {
+            CompaniasDeSeguros companiaSeguros = em.find(CompaniasDeSeguros.class, idCompaniaSeguro);
+            if (companiaSeguros != null) {
                 em.remove(companiaSeguros);
                 ok = 200;
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         return ok;
     }

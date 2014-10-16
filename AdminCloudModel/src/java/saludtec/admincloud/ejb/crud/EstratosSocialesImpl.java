@@ -47,15 +47,15 @@ public class EstratosSocialesImpl implements EstratosSocialesEjb {
 
     @Override
     public Integer eliminar(Integer idEstratoSocial) {
-        EstratosSociales estratoSocials = em.find(EstratosSociales.class, idEstratoSocial);
         Integer ok = 0;
-        if (estratoSocials != null) {
-            try {
+        try {
+            EstratosSociales estratoSocials = em.find(EstratosSociales.class, idEstratoSocial);
+            if (estratoSocials != null) {
                 em.remove(estratoSocials);
                 ok = 200;
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         return ok;
     }
@@ -72,12 +72,12 @@ public class EstratosSocialesImpl implements EstratosSocialesEjb {
 
     @Override
     public List<EstratosSociales> listar(Clinicas clinica) {
-        String queryStr = "SELECT e FROM EstratosSociales e "
-                + "WHERE e.idClinica = :idClinica "
-                + "ORDER BY e.estratoSocial";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
         try {
+            String queryStr = "SELECT e FROM EstratosSociales e "
+                    + "WHERE e.idClinica = :idClinica "
+                    + "ORDER BY e.estratoSocial";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

@@ -19,7 +19,7 @@ import saludtec.admincloud.ejb.entidades.Departamentos;
  */
 @Stateless
 public class DepartamentosImpl implements DepartamentosEjb {
-    
+
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
@@ -47,15 +47,15 @@ public class DepartamentosImpl implements DepartamentosEjb {
 
     @Override
     public Integer eliminar(Integer idDepartamento) {
-        Departamentos departamentos = em.find(Departamentos.class, idDepartamento);
         Integer ok = 0;
-        if (departamentos != null) {
-            try {
+        try {
+            Departamentos departamentos = em.find(Departamentos.class, idDepartamento);
+            if (departamentos != null) {
                 em.remove(departamentos);
                 ok = 200;
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         return ok;
     }
@@ -72,12 +72,12 @@ public class DepartamentosImpl implements DepartamentosEjb {
 
     @Override
     public List<Departamentos> listar(Clinicas clinica) {
-        String queryStr = "SELECT d FROM Departamentos d "
-                + "WHERE d.idClinica = :idClinica "
-                + "ORDER BY d.departamento";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
         try {
+            String queryStr = "SELECT d FROM Departamentos d "
+                    + "WHERE d.idClinica = :idClinica "
+                    + "ORDER BY d.departamento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.EstadosPacientes;
+import saludtec.admincloud.ejb.entidades.Convenios;
 
 /**
  *
  * @author saintec
  */
 @Stateless
-public class EstadosPacientesImpl implements EstadosPacientesEjb {
-
+public class ConveniosImpl implements ConveniosEjb{
+    
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public EstadosPacientes guardar(EstadosPacientes estadoPaciente) {
+    public Convenios guardar(Convenios convenio) {
         try {
-            em.persist(estadoPaciente);
-            return estadoPaciente;
+            em.persist(convenio);
+            return convenio;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -35,10 +36,10 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public EstadosPacientes editar(EstadosPacientes estadoPaciente) {
+    public Convenios editar(Convenios convenio) {
         try {
-            em.merge(estadoPaciente);
-            return estadoPaciente;
+            em.merge(convenio);
+            return convenio;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -46,12 +47,12 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public Integer eliminar(Integer idEstadoPaciente) {
+    public Integer eliminar(Integer idConvenio) {
         Integer ok = 0;
         try {
-            EstadosPacientes estadoPacientes = em.find(EstadosPacientes.class, idEstadoPaciente);
-            if (estadoPacientes != null) {
-                em.remove(estadoPacientes);
+            Convenios convenios = em.find(Convenios.class, idConvenio);
+            if (convenios != null) {
+                em.remove(convenios);
                 ok = 200;
             }
         } catch (Exception ex) {
@@ -61,9 +62,9 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public EstadosPacientes traer(Integer idEstadoPaciente) {
+    public Convenios traer(Integer idConvenio) {
         try {
-            return em.find(EstadosPacientes.class, idEstadoPaciente);
+            return em.find(Convenios.class, idConvenio);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -71,18 +72,18 @@ public class EstadosPacientesImpl implements EstadosPacientesEjb {
     }
 
     @Override
-    public List<EstadosPacientes> listar(Clinicas clinica) {
+    public List<Convenios> listar(Clinicas clinica) {
+        String queryStr = "SELECT c FROM Convenios c "
+                + "WHERE c.idClinica = :idClinica "
+                + "ORDER BY c.convenio";
+        Query query = em.createQuery(queryStr);
+        query.setParameter("idClinica", clinica);
         try {
-            String queryStr = "SELECT e FROM EstadosPacientes e "
-                    + "WHERE e.idClinica = :idClinica "
-                    + "ORDER BY e.estadoPaciente";
-            Query query = em.createQuery(queryStr);
-            query.setParameter("idClinica", clinica);
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
         }
     }
-
+    
 }

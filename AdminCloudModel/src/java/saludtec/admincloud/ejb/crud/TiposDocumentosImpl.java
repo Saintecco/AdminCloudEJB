@@ -38,15 +38,15 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
 
     @Override
     public Integer eliminar(Integer idTipoDocumento) {
-        TiposDeDocumentos tipoDocumentos = em.find(TiposDeDocumentos.class, idTipoDocumento);
         Integer ok = 0;
-        if (tipoDocumentos != null) {
-            try {
+        try {
+            TiposDeDocumentos tipoDocumentos = em.find(TiposDeDocumentos.class, idTipoDocumento);
+            if (tipoDocumentos != null) {
                 em.remove(tipoDocumentos);
                 ok = 200;
-            } catch (Exception ex) {
-            System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         return ok;
     }
@@ -63,12 +63,12 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
 
     @Override
     public List<TiposDeDocumentos> listar(Clinicas clinica) {
-        String queryStr = "SELECT t FROM TiposDeDocumentos t "
-                + "WHERE t.idClinica = :idClinica "
-                + "ORDER BY t.tipoDeDocumento";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
         try {
+            String queryStr = "SELECT t FROM TiposDeDocumentos t "
+                    + "WHERE t.idClinica = :idClinica "
+                    + "ORDER BY t.tipoDeDocumento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
