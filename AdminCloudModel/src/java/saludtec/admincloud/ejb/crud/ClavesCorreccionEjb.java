@@ -13,7 +13,7 @@ import saludtec.admincloud.ejb.entidades.Clinicas;
  *
  * @author saintec
  */
-public interface ClavesCorrecionEjb {
+public interface ClavesCorreccionEjb {
     
     ClavesCorreccionFactura guardar(ClavesCorreccionFactura claveCorreccion);
 

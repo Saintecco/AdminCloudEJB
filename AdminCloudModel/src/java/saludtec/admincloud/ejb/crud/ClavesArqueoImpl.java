@@ -20,7 +20,7 @@ import saludtec.admincloud.ejb.utilidades.UtilidadMD5;
  * @author saintec
  */
 @Stateless
-public class ClaveArqueoImpl implements ClaveArqueoEjb {
+public class ClavesArqueoImpl implements ClavesArqueoEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;

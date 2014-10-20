@@ -13,7 +13,7 @@ import saludtec.admincloud.ejb.entidades.Clinicas;
  *
  * @author saintec
  */
-public interface ClaveArqueoEjb {
+public interface ClavesArqueoEjb {
     
     ClavesArqueoDeCaja guardar(ClavesArqueoDeCaja claveArqueo);
 

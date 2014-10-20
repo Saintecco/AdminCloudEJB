@@ -19,7 +19,7 @@ import saludtec.admincloud.ejb.utilidades.UtilidadMD5;
  * @author saintec
  */
 @Stateless
-public class ClavesCorreccionImpl implements ClavesCorrecionEjb {
+public class ClavesCorreccionImpl implements ClavesCorreccionEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
