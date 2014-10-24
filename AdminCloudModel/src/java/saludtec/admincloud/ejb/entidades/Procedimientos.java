@@ -91,7 +91,7 @@ public class Procedimientos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ultima_edicion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
     @Basic(optional = false)
     @NotNull

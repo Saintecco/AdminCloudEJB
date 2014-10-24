@@ -54,26 +54,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clinicas.findByLimiteUsuarios", query = "SELECT c FROM Clinicas c WHERE c.limiteUsuarios = :limiteUsuarios"),
     @NamedQuery(name = "Clinicas.findByFechaLimiteActivo", query = "SELECT c FROM Clinicas c WHERE c.fechaLimiteActivo = :fechaLimiteActivo")})
 public class Clinicas implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<ClavesCorreccionFactura> clavesCorreccionFacturaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<Procedimientos> procedimientosList;
-    @OneToMany(mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<ClavesArqueoDeCaja> clavesArqueoDeCajaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<Convenios> conveniosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<ClavesCorreccionFactura> clavesCorrecionFacturaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<CategoriasProcedimientos> categoriasProcedimientosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<TiposDeMoneda> tiposDeMonedaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<ModulosClinicas> modulosClinicasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<Perfiles> perfilesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<EstratosSociales> estratosSocialesList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -156,7 +136,25 @@ public class Clinicas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<TiposDeVinculacion> tiposDeVinculacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Procedimientos> procedimientosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<EstratosSociales> estratosSocialesList;
+    @OneToMany(mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ClavesArqueoDeCaja> clavesArqueoDeCajaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<CompaniasDeSeguros> companiasDeSegurosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<TiposDeMonedas> tiposDeMonedasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Convenios> conveniosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ConsecutivosRecibos> consecutivosRecibosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ConsecutivosFacturacion> consecutivosFacturacionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ModulosClinicas> modulosClinicasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<CategoriasProcedimientos> categoriasProcedimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<Departamentos> departamentosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
@@ -165,6 +163,8 @@ public class Clinicas implements Serializable {
     private List<TiposDeDocumentos> tiposDeDocumentosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<EstadosPacientes> estadosPacientesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<ClavesCorreccionFactura> clavesCorreccionFacturaList;
 
     public Clinicas() {
     }
@@ -335,12 +335,93 @@ public class Clinicas implements Serializable {
     }
 
     @XmlTransient
+    public List<Procedimientos> getProcedimientosList() {
+        return procedimientosList;
+    }
+
+    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
+        this.procedimientosList = procedimientosList;
+    }
+
+    @XmlTransient
+    public List<EstratosSociales> getEstratosSocialesList() {
+        return estratosSocialesList;
+    }
+
+    public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
+        this.estratosSocialesList = estratosSocialesList;
+    }
+
+    @XmlTransient
+    public List<ClavesArqueoDeCaja> getClavesArqueoDeCajaList() {
+        return clavesArqueoDeCajaList;
+    }
+
+    public void setClavesArqueoDeCajaList(List<ClavesArqueoDeCaja> clavesArqueoDeCajaList) {
+        this.clavesArqueoDeCajaList = clavesArqueoDeCajaList;
+    }
+
+    @XmlTransient
     public List<CompaniasDeSeguros> getCompaniasDeSegurosList() {
         return companiasDeSegurosList;
     }
 
     public void setCompaniasDeSegurosList(List<CompaniasDeSeguros> companiasDeSegurosList) {
         this.companiasDeSegurosList = companiasDeSegurosList;
+    }
+
+    @XmlTransient
+    public List<TiposDeMonedas> getTiposDeMonedasList() {
+        return tiposDeMonedasList;
+    }
+
+    public void setTiposDeMonedasList(List<TiposDeMonedas> tiposDeMonedasList) {
+        this.tiposDeMonedasList = tiposDeMonedasList;
+    }
+
+    @XmlTransient
+    public List<Convenios> getConveniosList() {
+        return conveniosList;
+    }
+
+    public void setConveniosList(List<Convenios> conveniosList) {
+        this.conveniosList = conveniosList;
+    }
+
+    @XmlTransient
+    public List<ConsecutivosRecibos> getConsecutivosRecibosList() {
+        return consecutivosRecibosList;
+    }
+
+    public void setConsecutivosRecibosList(List<ConsecutivosRecibos> consecutivosRecibosList) {
+        this.consecutivosRecibosList = consecutivosRecibosList;
+    }
+
+    @XmlTransient
+    public List<ConsecutivosFacturacion> getConsecutivosFacturacionList() {
+        return consecutivosFacturacionList;
+    }
+
+    public void setConsecutivosFacturacionList(List<ConsecutivosFacturacion> consecutivosFacturacionList) {
+        this.consecutivosFacturacionList = consecutivosFacturacionList;
+    }
+
+    @XmlTransient
+    public List<ModulosClinicas> getModulosClinicasList() {
+        return modulosClinicasList;
+    }
+
+    public void setModulosClinicasList(List<ModulosClinicas> modulosClinicasList) {
+        this.modulosClinicasList = modulosClinicasList;
+    }
+
+    @XmlTransient
+    public List<CategoriasProcedimientos> getCategoriasProcedimientosList() {
+        return categoriasProcedimientosList;
+    }
+
+    public void setCategoriasProcedimientosList(List<CategoriasProcedimientos> categoriasProcedimientosList) {
+        this.categoriasProcedimientosList = categoriasProcedimientosList;
     }
 
     @XmlTransient
@@ -379,6 +460,15 @@ public class Clinicas implements Serializable {
         this.estadosPacientesList = estadosPacientesList;
     }
 
+    @XmlTransient
+    public List<ClavesCorreccionFactura> getClavesCorreccionFacturaList() {
+        return clavesCorreccionFacturaList;
+    }
+
+    public void setClavesCorreccionFacturaList(List<ClavesCorreccionFactura> clavesCorreccionFacturaList) {
+        this.clavesCorreccionFacturaList = clavesCorreccionFacturaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -401,88 +491,7 @@ public class Clinicas implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.Clinicas[ idClinica=" + idClinica + " ]";
-    }
-
-    @XmlTransient
-    public List<EstratosSociales> getEstratosSocialesList() {
-        return estratosSocialesList;
-    }
-
-    public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
-        this.estratosSocialesList = estratosSocialesList;
-    }
-
-    @XmlTransient
-    public List<ModulosClinicas> getModulosClinicasList() {
-        return modulosClinicasList;
-    }
-
-    public void setModulosClinicasList(List<ModulosClinicas> modulosClinicasList) {
-        this.modulosClinicasList = modulosClinicasList;
-    }
-
-    @XmlTransient
-    public List<Perfiles> getPerfilesList() {
-        return perfilesList;
-    }
-
-    public void setPerfilesList(List<Perfiles> perfilesList) {
-        this.perfilesList = perfilesList;
-    }
-
-    @XmlTransient
-    public List<Procedimientos> getProcedimientosList() {
-        return procedimientosList;
-    }
-
-    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
-        this.procedimientosList = procedimientosList;
-    }
-
-    @XmlTransient
-    public List<ClavesArqueoDeCaja> getClavesArqueoDeCajaList() {
-        return clavesArqueoDeCajaList;
-    }
-
-    public void setClavesArqueoDeCajaList(List<ClavesArqueoDeCaja> clavesArqueoDeCajaList) {
-        this.clavesArqueoDeCajaList = clavesArqueoDeCajaList;
-    }
-
-    @XmlTransient
-    public List<Convenios> getConveniosList() {
-        return conveniosList;
-    }
-
-    public void setConveniosList(List<Convenios> conveniosList) {
-        this.conveniosList = conveniosList;
-    }
-
-    @XmlTransient
-    public List<CategoriasProcedimientos> getCategoriasProcedimientosList() {
-        return categoriasProcedimientosList;
-    }
-
-    public void setCategoriasProcedimientosList(List<CategoriasProcedimientos> categoriasProcedimientosList) {
-        this.categoriasProcedimientosList = categoriasProcedimientosList;
-    }
-
-    @XmlTransient
-    public List<TiposDeMoneda> getTiposDeMonedaList() {
-        return tiposDeMonedaList;
-    }
-
-    public void setTiposDeMonedaList(List<TiposDeMoneda> tiposDeMonedaList) {
-        this.tiposDeMonedaList = tiposDeMonedaList;
-    }
-
-    @XmlTransient
-    public List<ClavesCorreccionFactura> getClavesCorreccionFacturaList() {
-        return clavesCorreccionFacturaList;
-    }
-
-    public void setClavesCorreccionFacturaList(List<ClavesCorreccionFactura> clavesCorreccionFacturaList) {
-        this.clavesCorreccionFacturaList = clavesCorreccionFacturaList;
+        return "saludtec.admincloud.ejb.entidades.Clinicas[ idClinica=" + idClinica + " ]";
     }
     
 }

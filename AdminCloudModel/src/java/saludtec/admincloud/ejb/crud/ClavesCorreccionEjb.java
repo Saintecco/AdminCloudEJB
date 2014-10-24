@@ -23,6 +23,7 @@ public interface ClavesCorreccionEjb {
 
     ClavesCorreccionFactura traer(Integer idClaveCorreccion);
     
-    ClavesCorreccionFactura traer(String claveCorreccion, Clinicas clinica);
+    ClavesCorreccionFactura traer(Clinicas clinica);
     
+    ClavesCorreccionFactura traer(String claveCorreccion, Clinicas clinica);
 }

@@ -59,7 +59,7 @@ public class ClavesArqueoDeCaja implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ultima_edicion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(fetch = FetchType.LAZY)

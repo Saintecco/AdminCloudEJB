@@ -156,7 +156,7 @@ public class TiposDeDocumentos implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.TiposDeDocumentos[ idTipoDeDocumento=" + idTipoDeDocumento + " ]";
+        return "saludtec.admincloud.ejb.entidades.TiposDeDocumentos[ idTipoDeDocumento=" + idTipoDeDocumento + " ]";
     }
     
 }

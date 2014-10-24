@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import saludtec.admincloud.ejb.entidades.ClavesArqueoDeCaja;
@@ -14,7 +13,7 @@ import saludtec.admincloud.ejb.entidades.Clinicas;
  * @author saintec
  */
 public interface ClavesArqueoEjb {
-    
+
     ClavesArqueoDeCaja guardar(ClavesArqueoDeCaja claveArqueo);
 
     ClavesArqueoDeCaja editar(ClavesArqueoDeCaja claveArqueo);
@@ -22,7 +21,8 @@ public interface ClavesArqueoEjb {
     Integer eliminar(Integer idClaveArqueo);
 
     ClavesArqueoDeCaja traer(Integer idClaveArqueo);
-    
+
+    ClavesArqueoDeCaja traer(Clinicas clinica);
+
     ClavesArqueoDeCaja traer(String claveArqueo, Clinicas clinica);
-    
 }

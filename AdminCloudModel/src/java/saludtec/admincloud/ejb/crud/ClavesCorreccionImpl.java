@@ -71,6 +71,21 @@ public class ClavesCorreccionImpl implements ClavesCorreccionEjb {
     }
 
     @Override
+    public ClavesCorreccionFactura traer(Clinicas clinica) {
+        try {
+            String queryStr = "SELECT c FROM ClavesCorreccionFactura c "
+                    + "WHERE c.idClinica = :idClinica ";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
+            List<ClavesCorreccionFactura> ccf = query.getResultList();
+            return ccf.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    @Override
     public ClavesCorreccionFactura traer(String claveCorreccion, Clinicas clinica) {
         try {
             String queryStr = "SELECT c FROM ClavesCorreccionFactura c "

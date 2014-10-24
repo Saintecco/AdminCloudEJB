@@ -59,12 +59,12 @@ public class CompaniasDeSeguros implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ultima_edicion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
     @Basic(optional = false)
     @NotNull

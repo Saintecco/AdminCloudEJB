@@ -31,17 +31,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "tipos_de_moneda")
+@Table(name = "tipos_de_monedas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposDeMoneda.findAll", query = "SELECT t FROM TiposDeMoneda t"),
-    @NamedQuery(name = "TiposDeMoneda.findByIdTipoDeMoneda", query = "SELECT t FROM TiposDeMoneda t WHERE t.idTipoDeMoneda = :idTipoDeMoneda"),
-    @NamedQuery(name = "TiposDeMoneda.findByTipoMoneda", query = "SELECT t FROM TiposDeMoneda t WHERE t.tipoMoneda = :tipoMoneda"),
-    @NamedQuery(name = "TiposDeMoneda.findByValor", query = "SELECT t FROM TiposDeMoneda t WHERE t.valor = :valor"),
-    @NamedQuery(name = "TiposDeMoneda.findByFechaCreacion", query = "SELECT t FROM TiposDeMoneda t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "TiposDeMoneda.findByUltimaEdicion", query = "SELECT t FROM TiposDeMoneda t WHERE t.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "TiposDeMoneda.findByEstado", query = "SELECT t FROM TiposDeMoneda t WHERE t.estado = :estado")})
-public class TiposDeMoneda implements Serializable {
+    @NamedQuery(name = "TiposDeMonedas.findAll", query = "SELECT t FROM TiposDeMonedas t"),
+    @NamedQuery(name = "TiposDeMonedas.findByIdTipoDeMoneda", query = "SELECT t FROM TiposDeMonedas t WHERE t.idTipoDeMoneda = :idTipoDeMoneda"),
+    @NamedQuery(name = "TiposDeMonedas.findByTipoMoneda", query = "SELECT t FROM TiposDeMonedas t WHERE t.tipoMoneda = :tipoMoneda"),
+    @NamedQuery(name = "TiposDeMonedas.findByNombreMoneda", query = "SELECT t FROM TiposDeMonedas t WHERE t.nombreMoneda = :nombreMoneda"),
+    @NamedQuery(name = "TiposDeMonedas.findByValor", query = "SELECT t FROM TiposDeMonedas t WHERE t.valor = :valor"),
+    @NamedQuery(name = "TiposDeMonedas.findByFechaCreacion", query = "SELECT t FROM TiposDeMonedas t WHERE t.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "TiposDeMonedas.findByUltimaEdicion", query = "SELECT t FROM TiposDeMonedas t WHERE t.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "TiposDeMonedas.findByEstado", query = "SELECT t FROM TiposDeMonedas t WHERE t.estado = :estado")})
+public class TiposDeMonedas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +56,11 @@ public class TiposDeMoneda implements Serializable {
     private String tipoMoneda;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 250)
+    @Column(name = "nombre_moneda")
+    private String nombreMoneda;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "valor")
     private double valor;
     @Basic(optional = false)
@@ -65,7 +71,7 @@ public class TiposDeMoneda implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ultima_edicion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
     @Basic(optional = false)
     @NotNull
@@ -76,16 +82,17 @@ public class TiposDeMoneda implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
 
-    public TiposDeMoneda() {
+    public TiposDeMonedas() {
     }
 
-    public TiposDeMoneda(Integer idTipoDeMoneda) {
+    public TiposDeMonedas(Integer idTipoDeMoneda) {
         this.idTipoDeMoneda = idTipoDeMoneda;
     }
 
-    public TiposDeMoneda(Integer idTipoDeMoneda, String tipoMoneda, double valor, Date fechaCreacion, Date ultimaEdicion, String estado) {
+    public TiposDeMonedas(Integer idTipoDeMoneda, String tipoMoneda, String nombreMoneda, double valor, Date fechaCreacion, Date ultimaEdicion, String estado) {
         this.idTipoDeMoneda = idTipoDeMoneda;
         this.tipoMoneda = tipoMoneda;
+        this.nombreMoneda = nombreMoneda;
         this.valor = valor;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
@@ -106,6 +113,14 @@ public class TiposDeMoneda implements Serializable {
 
     public void setTipoMoneda(String tipoMoneda) {
         this.tipoMoneda = tipoMoneda;
+    }
+
+    public String getNombreMoneda() {
+        return nombreMoneda;
+    }
+
+    public void setNombreMoneda(String nombreMoneda) {
+        this.nombreMoneda = nombreMoneda;
     }
 
     public double getValor() {
@@ -158,10 +173,10 @@ public class TiposDeMoneda implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposDeMoneda)) {
+        if (!(object instanceof TiposDeMonedas)) {
             return false;
         }
-        TiposDeMoneda other = (TiposDeMoneda) object;
+        TiposDeMonedas other = (TiposDeMonedas) object;
         if ((this.idTipoDeMoneda == null && other.idTipoDeMoneda != null) || (this.idTipoDeMoneda != null && !this.idTipoDeMoneda.equals(other.idTipoDeMoneda))) {
             return false;
         }
@@ -170,7 +185,7 @@ public class TiposDeMoneda implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admincloud.ejb.entidades.TiposDeMoneda[ idTipoDeMoneda=" + idTipoDeMoneda + " ]";
+        return "saludtec.admincloud.ejb.entidades.TiposDeMonedas[ idTipoDeMoneda=" + idTipoDeMoneda + " ]";
     }
     
 }

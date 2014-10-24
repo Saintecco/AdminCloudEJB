@@ -142,7 +142,7 @@ public class Razas implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.Razas[ idRaza=" + idRaza + " ]";
+        return "saludtec.admincloud.ejb.entidades.Razas[ idRaza=" + idRaza + " ]";
     }
     
 }

@@ -70,6 +70,21 @@ public class ClavesArqueoImpl implements ClavesArqueoEjb {
             return null;
         }
     }
+    
+    @Override
+    public ClavesArqueoDeCaja traer(Clinicas clinica) {
+        try {
+            String queryStr = "SELECT c FROM ClavesArqueoDeCaja c "
+                    + "WHERE c.idClinica = :idClinica ";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
+            List<ClavesArqueoDeCaja> cac = query.getResultList();
+            return cac.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public ClavesArqueoDeCaja traer(String claveArqueo, Clinicas clinica) {

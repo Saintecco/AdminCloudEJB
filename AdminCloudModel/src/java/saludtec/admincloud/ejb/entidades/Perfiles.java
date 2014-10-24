@@ -11,17 +11,15 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,10 +33,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Perfiles.findAll", query = "SELECT p FROM Perfiles p"),
     @NamedQuery(name = "Perfiles.findByIdPerfil", query = "SELECT p FROM Perfiles p WHERE p.idPerfil = :idPerfil"),
-    @NamedQuery(name = "Perfiles.findByNombrePerfil", query = "SELECT p FROM Perfiles p WHERE p.nombrePerfil = :nombrePerfil"),
+    @NamedQuery(name = "Perfiles.findByPerfil", query = "SELECT p FROM Perfiles p WHERE p.perfil = :perfil"),
     @NamedQuery(name = "Perfiles.findByFechaCreacion", query = "SELECT p FROM Perfiles p WHERE p.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Perfiles.findByUltimaEdicion", query = "SELECT p FROM Perfiles p WHERE p.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "Perfiles.findByEstado", query = "SELECT p FROM Perfiles p WHERE p.estado = :estado")})
+    @NamedQuery(name = "Perfiles.findByEstado", query = "SELECT p FROM Perfiles p WHERE p.estado = :estado"),
+    @NamedQuery(name = "Perfiles.findByIdClinica", query = "SELECT p FROM Perfiles p WHERE p.idClinica = :idClinica")})
 public class Perfiles implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,27 +45,45 @@ public class Perfiles implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_perfil")
     private Integer idPerfil;
-    @Size(max = 100)
-    @Column(name = "nombre_perfil")
-    private String nombrePerfil;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "perfil")
+    private String perfil;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "ultima_edicion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaEdicion;
-    @Size(max = 50)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Clinicas idClinica;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_clinica")
+    private int idClinica;
 
     public Perfiles() {
     }
 
     public Perfiles(Integer idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    public Perfiles(Integer idPerfil, String perfil, Date fechaCreacion, Date ultimaEdicion, String estado, int idClinica) {
+        this.idPerfil = idPerfil;
+        this.perfil = perfil;
+        this.fechaCreacion = fechaCreacion;
+        this.ultimaEdicion = ultimaEdicion;
+        this.estado = estado;
+        this.idClinica = idClinica;
     }
 
     public Integer getIdPerfil() {
@@ -77,12 +94,12 @@ public class Perfiles implements Serializable {
         this.idPerfil = idPerfil;
     }
 
-    public String getNombrePerfil() {
-        return nombrePerfil;
+    public String getPerfil() {
+        return perfil;
     }
 
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public Date getFechaCreacion() {
@@ -109,11 +126,11 @@ public class Perfiles implements Serializable {
         this.estado = estado;
     }
 
-    public Clinicas getIdClinica() {
+    public int getIdClinica() {
         return idClinica;
     }
 
-    public void setIdClinica(Clinicas idClinica) {
+    public void setIdClinica(int idClinica) {
         this.idClinica = idClinica;
     }
 

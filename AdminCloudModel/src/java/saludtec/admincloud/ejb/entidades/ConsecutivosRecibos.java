@@ -11,7 +11,10 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,8 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ConsecutivosRecibos.findByNumeroActual", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.numeroActual = :numeroActual"),
     @NamedQuery(name = "ConsecutivosRecibos.findByFechaCreacion", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "ConsecutivosRecibos.findByUltimaEdicion", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "ConsecutivosRecibos.findByEstado", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.estado = :estado"),
-    @NamedQuery(name = "ConsecutivosRecibos.findByIdClinica", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.idClinica = :idClinica")})
+    @NamedQuery(name = "ConsecutivosRecibos.findByEstado", query = "SELECT c FROM ConsecutivosRecibos c WHERE c.estado = :estado")})
 public class ConsecutivosRecibos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,10 +64,9 @@ public class ConsecutivosRecibos implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_clinica")
-    private int idClinica;
+    @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Clinicas idClinica;
 
     public ConsecutivosRecibos() {
     }
@@ -74,13 +75,12 @@ public class ConsecutivosRecibos implements Serializable {
         this.idInformacionFacturacion = idInformacionFacturacion;
     }
 
-    public ConsecutivosRecibos(Integer idInformacionFacturacion, int numeroActual, Date fechaCreacion, Date ultimaEdicion, String estado, int idClinica) {
+    public ConsecutivosRecibos(Integer idInformacionFacturacion, int numeroActual, Date fechaCreacion, Date ultimaEdicion, String estado) {
         this.idInformacionFacturacion = idInformacionFacturacion;
         this.numeroActual = numeroActual;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
-        this.idClinica = idClinica;
     }
 
     public Integer getIdInformacionFacturacion() {
@@ -123,11 +123,11 @@ public class ConsecutivosRecibos implements Serializable {
         this.estado = estado;
     }
 
-    public int getIdClinica() {
+    public Clinicas getIdClinica() {
         return idClinica;
     }
 
-    public void setIdClinica(int idClinica) {
+    public void setIdClinica(Clinicas idClinica) {
         this.idClinica = idClinica;
     }
 
@@ -153,7 +153,7 @@ public class ConsecutivosRecibos implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.ConsecutivosRecibos[ idInformacionFacturacion=" + idInformacionFacturacion + " ]";
+        return "saludtec.admincloud.ejb.entidades.ConsecutivosRecibos[ idInformacionFacturacion=" + idInformacionFacturacion + " ]";
     }
     
 }

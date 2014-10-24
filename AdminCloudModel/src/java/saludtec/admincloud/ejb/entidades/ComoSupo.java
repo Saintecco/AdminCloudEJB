@@ -156,7 +156,7 @@ public class ComoSupo implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admin_cloud.ejb.entidades.ComoSupo[ idComoSupo=" + idComoSupo + " ]";
+        return "saludtec.admincloud.ejb.entidades.ComoSupo[ idComoSupo=" + idComoSupo + " ]";
     }
     
 }
