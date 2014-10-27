@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import saludtec.admincloud.ejb.entidades.Convenios;
  * @author saintec
  */
 public interface ConveniosEjb {
-    
+
     Convenios guardar(Convenios convenio);
 
     Convenios editar(Convenios convenio);
@@ -24,6 +23,8 @@ public interface ConveniosEjb {
 
     Convenios traer(Integer idConvenio);
 
+    Convenios traer(String codigo, Clinicas clinica);
+
     List<Convenios> listar(Clinicas clinica);
-    
+
 }

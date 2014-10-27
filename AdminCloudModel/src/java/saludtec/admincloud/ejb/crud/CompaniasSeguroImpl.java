@@ -71,13 +71,32 @@ public class CompaniasSeguroImpl implements CompaniasSeguroEjb {
     }
 
     @Override
-    public List<CompaniasDeSeguros> listar(Clinicas clinica) {
-        String queryStr = "SELECT c FROM CompaniasDeSeguros c "
-                + "WHERE c.idClinica = :idClinica "
-                + "ORDER BY c.companiaDeSeguro";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
+    public CompaniasDeSeguros traer(String codigo, Clinicas clinica) {
         try {
+            String queryStr = "SELECT c FROM CompaniasDeSeguros c "
+                    + "WHERE c.codigo = :codigo "
+                    + "AND c.idClinia = :idClinica "
+                    + "ORDER BY c.companiaDeSeguro";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("codigo", codigo);
+            query.setParameter("idClinica", clinica);
+            List<CompaniasDeSeguros> companiaDeSeguro = query.getResultList();
+            return companiaDeSeguro.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<CompaniasDeSeguros> listar(Clinicas clinica) {
+        try {
+            String queryStr = "SELECT c FROM CompaniasDeSeguros c "
+                    + "WHERE c.idClinica = :idClinica "
+                    + "ORDER BY c.companiaDeSeguro";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
+
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

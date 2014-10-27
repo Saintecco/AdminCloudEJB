@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -20,8 +19,8 @@ import saludtec.admincloud.ejb.entidades.Procedimientos;
  * @author saintec
  */
 @Stateless
-public class ProcedimientosImpl implements ProcedimientosEjb{
-    
+public class ProcedimientosImpl implements ProcedimientosEjb {
+
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
@@ -73,19 +72,37 @@ public class ProcedimientosImpl implements ProcedimientosEjb{
     }
 
     @Override
-    public List<Procedimientos> listar(Clinicas clinica) {
-        String queryStr = "SELECT p FROM Procedimientos p "
-                + "WHERE p.idClinica = :idClinica "
-                + "ORDER BY p.procedimiento";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
+    public Procedimientos traer(String cups, Clinicas clinica) {
         try {
+            String queryStr = "SELECT p FROM Procedimientos p "
+                    + "WHERE p.cups = :cups "
+                    + "AND p.idClinica = :idClinica "
+                    + "ORDER BY p.procedimiento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("cups", cups);
+            query.setParameter("idClinica", clinica);
+            List<Procedimientos> procedimiento = query.getResultList();
+            return procedimiento.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Procedimientos> listar(Clinicas clinica) {
+        try {
+            String queryStr = "SELECT p FROM Procedimientos p "
+                    + "WHERE p.idClinica = :idClinica "
+                    + "ORDER BY p.procedimiento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
+
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
         }
     }
-    
-    
+
 }

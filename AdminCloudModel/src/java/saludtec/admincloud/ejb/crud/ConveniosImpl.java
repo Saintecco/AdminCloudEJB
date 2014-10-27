@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -19,8 +18,8 @@ import saludtec.admincloud.ejb.entidades.Convenios;
  * @author saintec
  */
 @Stateless
-public class ConveniosImpl implements ConveniosEjb{
-    
+public class ConveniosImpl implements ConveniosEjb {
+
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
@@ -72,18 +71,37 @@ public class ConveniosImpl implements ConveniosEjb{
     }
 
     @Override
-    public List<Convenios> listar(Clinicas clinica) {
-        String queryStr = "SELECT c FROM Convenios c "
-                + "WHERE c.idClinica = :idClinica "
-                + "ORDER BY c.convenio";
-        Query query = em.createQuery(queryStr);
-        query.setParameter("idClinica", clinica);
+    public Convenios traer(String codigo, Clinicas clinica) {
         try {
+            String queryStr = "SELECT c FROM Convenios c "
+                    + "WHERE c.codigoConvenio = :codigo "
+                    + "AND c.idClinica = :idClinica "
+                    + "ORDER BY c.convenio";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("codigo", codigo);
+            query.setParameter("idClinica", clinica);
+            List<Convenios> convenio = query.getResultList();
+            return convenio.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Convenios> listar(Clinicas clinica) {
+        try {
+            String queryStr = "SELECT c FROM Convenios c "
+                    + "WHERE c.idClinica = :idClinica "
+                    + "ORDER BY c.convenio";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idClinica", clinica);
+
             return query.getResultList();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
         }
     }
-    
+
 }

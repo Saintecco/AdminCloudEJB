@@ -71,6 +71,24 @@ public class DepartamentosImpl implements DepartamentosEjb {
     }
 
     @Override
+    public Departamentos traer(String codigo, Clinicas clinica) {
+        try {
+            String queryStr = "SELECT d FROM Departamentos d "
+                    + "WHERE d.codigo = :codigo "
+                    + "AND idClinica = :idClinica "
+                    + "ORDER BY d.departamento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("codigo", codigo);
+            query.setParameter("idClinica", clinica);
+            List<Departamentos> departamento = query.getResultList();
+            return departamento.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
     public List<Departamentos> listar(Clinicas clinica) {
         try {
             String queryStr = "SELECT d FROM Departamentos d "

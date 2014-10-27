@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -15,8 +14,8 @@ import saludtec.admincloud.ejb.entidades.TiposDeVinculacion;
  * @author saintec
  */
 public interface TiposVinculacionEjb {
-    
-    TiposDeVinculacion guardar(TiposDeVinculacion  tipoVinculacion);
+
+    TiposDeVinculacion guardar(TiposDeVinculacion tipoVinculacion);
 
     TiposDeVinculacion editar(TiposDeVinculacion tipoVinculacion);
 
@@ -25,5 +24,5 @@ public interface TiposVinculacionEjb {
     TiposDeVinculacion traer(Integer idTipoVinculacion);
 
     List<TiposDeVinculacion> listar(Clinicas clinica);
-    
+
 }

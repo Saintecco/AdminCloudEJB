@@ -24,6 +24,8 @@ public interface DepartamentosEjb {
 
     Departamentos traer(Integer idDepartamento);
 
+    Departamentos traer(String codigo, Clinicas clinica);
+
     List<Departamentos> listar(Clinicas clinica);
     
 }

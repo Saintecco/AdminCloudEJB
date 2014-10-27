@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import saludtec.admincloud.ejb.entidades.CompaniasDeSeguros;
  * @author saintec
  */
 public interface CompaniasSeguroEjb {
-    
+
     CompaniasDeSeguros guardar(CompaniasDeSeguros companiaSeguro);
 
     CompaniasDeSeguros editar(CompaniasDeSeguros companiaSeguro);
@@ -24,6 +23,8 @@ public interface CompaniasSeguroEjb {
 
     CompaniasDeSeguros traer(Integer idCompaniaSeguro);
 
+    CompaniasDeSeguros traer(String codigo, Clinicas clinica);
+
     List<CompaniasDeSeguros> listar(Clinicas clinica);
-    
+
 }
