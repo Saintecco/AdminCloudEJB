@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Procedimientos.findByActoQuirurgico", query = "SELECT p FROM Procedimientos p WHERE p.actoQuirurgico = :actoQuirurgico"),
     @NamedQuery(name = "Procedimientos.findByCups", query = "SELECT p FROM Procedimientos p WHERE p.cups = :cups"),
     @NamedQuery(name = "Procedimientos.findByValor", query = "SELECT p FROM Procedimientos p WHERE p.valor = :valor"),
+    @NamedQuery(name = "Procedimientos.findByEditable", query = "SELECT p FROM Procedimientos p WHERE p.editable = :editable"),
     @NamedQuery(name = "Procedimientos.findByFechaCreacion", query = "SELECT p FROM Procedimientos p WHERE p.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Procedimientos.findByUltimaEdicion", query = "SELECT p FROM Procedimientos p WHERE p.ultimaEdicion = :ultimaEdicion"),
     @NamedQuery(name = "Procedimientos.findByEstado", query = "SELECT p FROM Procedimientos p WHERE p.estado = :estado")})
@@ -85,6 +86,11 @@ public class Procedimientos implements Serializable {
     private double valor;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "editable")
+    private String editable;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
@@ -112,7 +118,7 @@ public class Procedimientos implements Serializable {
         this.idProcedimiento = idProcedimiento;
     }
 
-    public Procedimientos(Integer idProcedimiento, String procedimiento, int rango, int ambitoRealizacion, int finalidadProcedimiento, int actoQuirurgico, String cups, double valor, Date fechaCreacion, Date ultimaEdicion, String estado) {
+    public Procedimientos(Integer idProcedimiento, String procedimiento, int rango, int ambitoRealizacion, int finalidadProcedimiento, int actoQuirurgico, String cups, double valor, String editable, Date fechaCreacion, Date ultimaEdicion, String estado) {
         this.idProcedimiento = idProcedimiento;
         this.procedimiento = procedimiento;
         this.rango = rango;
@@ -121,6 +127,7 @@ public class Procedimientos implements Serializable {
         this.actoQuirurgico = actoQuirurgico;
         this.cups = cups;
         this.valor = valor;
+        this.editable = editable;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
@@ -188,6 +195,14 @@ public class Procedimientos implements Serializable {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public String getEditable() {
+        return editable;
+    }
+
+    public void setEditable(String editable) {
+        this.editable = editable;
     }
 
     public Date getFechaCreacion() {

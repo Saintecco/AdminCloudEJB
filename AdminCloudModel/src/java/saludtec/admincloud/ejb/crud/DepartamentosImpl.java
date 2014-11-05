@@ -75,7 +75,7 @@ public class DepartamentosImpl implements DepartamentosEjb {
         try {
             String queryStr = "SELECT d FROM Departamentos d "
                     + "WHERE d.codigo = :codigo "
-                    + "AND idClinica = :idClinica "
+                    + "AND d.idClinica = :idClinica "
                     + "ORDER BY d.departamento";
             Query query = em.createQuery(queryStr);
             query.setParameter("codigo", codigo);
