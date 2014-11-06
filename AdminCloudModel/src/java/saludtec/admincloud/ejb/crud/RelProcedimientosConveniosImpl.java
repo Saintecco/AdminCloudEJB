@@ -74,7 +74,7 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
     public List<RelProcedimientosConvenios> listar(Convenios convenio) {
         try {
             String queryStr = "SELECT r FROM RelProcedimientosConvenios r "
-                    + "INNER JOIN r.Procedimientos p"
+                    + "INNER JOIN r.idProcedimiento p"
                     + "WHERE r.idConvenio = :idConvenio "
                     + "ORDER BY p.procedimiento";
             Query query = em.createQuery(queryStr);
@@ -92,8 +92,7 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
         try {
             String queryStr = "SELECT r FROM RelProcedimientosConvenios r "
                     + "WHERE r.idConvenio = :idConvenio "
-                    + "AND r.idProcedimiento = :idProcedimiento "
-                    + "ORDER BY p.procedimiento";
+                    + "AND r.idProcedimiento = :idProcedimiento";
             Query query = em.createQuery(queryStr);
             query.setParameter("idConvenio", convenio);
             query.setParameter("idProcedimiento", procedimiento);

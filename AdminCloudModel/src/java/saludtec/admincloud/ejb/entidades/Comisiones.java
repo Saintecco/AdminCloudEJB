@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comisiones.findByIdComision", query = "SELECT c FROM Comisiones c WHERE c.idComision = :idComision"),
     @NamedQuery(name = "Comisiones.findByTipoComision", query = "SELECT c FROM Comisiones c WHERE c.tipoComision = :tipoComision"),
     @NamedQuery(name = "Comisiones.findByValorComision", query = "SELECT c FROM Comisiones c WHERE c.valorComision = :valorComision"),
+    @NamedQuery(name = "Comisiones.findByTotal", query = "SELECT c FROM Comisiones c WHERE c.total = :total"),
     @NamedQuery(name = "Comisiones.findByFechaCreacion", query = "SELECT c FROM Comisiones c WHERE c.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Comisiones.findByUltimaEdicion", query = "SELECT c FROM Comisiones c WHERE c.ultimaEdicion = :ultimaEdicion"),
     @NamedQuery(name = "Comisiones.findByEstado", query = "SELECT c FROM Comisiones c WHERE c.estado = :estado")})
@@ -55,6 +56,10 @@ public class Comisiones implements Serializable {
     @NotNull
     @Column(name = "valor_comision")
     private double valorComision;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "total")
+    private double total;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -87,10 +92,11 @@ public class Comisiones implements Serializable {
         this.idComision = idComision;
     }
 
-    public Comisiones(Integer idComision, String tipoComision, double valorComision, Date fechaCreacion, Date ultimaEdicion, String estado) {
+    public Comisiones(Integer idComision, String tipoComision, double valorComision, double total, Date fechaCreacion, Date ultimaEdicion, String estado) {
         this.idComision = idComision;
         this.tipoComision = tipoComision;
         this.valorComision = valorComision;
+        this.total = total;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
@@ -118,6 +124,14 @@ public class Comisiones implements Serializable {
 
     public void setValorComision(double valorComision) {
         this.valorComision = valorComision;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public Date getFechaCreacion() {
