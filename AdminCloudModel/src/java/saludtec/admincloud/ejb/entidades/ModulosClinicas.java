@@ -54,12 +54,12 @@ public class ModulosClinicas implements Serializable {
     @Size(max = 50)
     @Column(name = "estado")
     private String estado;
-    @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Modulos idModulo;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
+    @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Modulos idModulo;
 
     public ModulosClinicas() {
     }
@@ -100,20 +100,20 @@ public class ModulosClinicas implements Serializable {
         this.estado = estado;
     }
 
-    public Modulos getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(Modulos idModulo) {
-        this.idModulo = idModulo;
-    }
-
     public Clinicas getIdClinica() {
         return idClinica;
     }
 
     public void setIdClinica(Clinicas idClinica) {
         this.idClinica = idClinica;
+    }
+
+    public Modulos getIdModulo() {
+        return idModulo;
+    }
+
+    public void setIdModulo(Modulos idModulo) {
+        this.idModulo = idModulo;
     }
 
     @Override

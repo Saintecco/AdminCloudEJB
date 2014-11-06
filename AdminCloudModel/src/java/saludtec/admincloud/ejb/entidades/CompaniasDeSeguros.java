@@ -8,7 +8,9 @@ package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +21,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -74,6 +78,8 @@ public class CompaniasDeSeguros implements Serializable {
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompaniaDeSeguro", fetch = FetchType.LAZY)
+    private List<Pacientes> pacientesList;
 
     public CompaniasDeSeguros() {
     }
@@ -144,6 +150,15 @@ public class CompaniasDeSeguros implements Serializable {
 
     public void setIdClinica(Clinicas idClinica) {
         this.idClinica = idClinica;
+    }
+
+    @XmlTransient
+    public List<Pacientes> getPacientesList() {
+        return pacientesList;
+    }
+
+    public void setPacientesList(List<Pacientes> pacientesList) {
+        this.pacientesList = pacientesList;
     }
 
     @Override

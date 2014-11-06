@@ -138,21 +138,29 @@ public class Clinicas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<Procedimientos> procedimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<EstratosSociales> estratosSocialesList;
+    private List<CompaniasDeSeguros> companiasDeSegurosList;
     @OneToMany(mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<ClavesArqueoDeCaja> clavesArqueoDeCajaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
-    private List<CompaniasDeSeguros> companiasDeSegurosList;
+    private List<EstratosSociales> estratosSocialesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<TiposDeMonedas> tiposDeMonedasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Pacientes> pacientesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Comisiones> comisionesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<Convenios> conveniosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<Profesionales> profesionalesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<ConsecutivosRecibos> consecutivosRecibosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<ConsecutivosFacturacion> consecutivosFacturacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<ModulosClinicas> modulosClinicasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
+    private List<RelProcedimientosConvenios> relProcedimientosConveniosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
     private List<CategoriasProcedimientos> categoriasProcedimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClinica", fetch = FetchType.LAZY)
@@ -344,12 +352,12 @@ public class Clinicas implements Serializable {
     }
 
     @XmlTransient
-    public List<EstratosSociales> getEstratosSocialesList() {
-        return estratosSocialesList;
+    public List<CompaniasDeSeguros> getCompaniasDeSegurosList() {
+        return companiasDeSegurosList;
     }
 
-    public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
-        this.estratosSocialesList = estratosSocialesList;
+    public void setCompaniasDeSegurosList(List<CompaniasDeSeguros> companiasDeSegurosList) {
+        this.companiasDeSegurosList = companiasDeSegurosList;
     }
 
     @XmlTransient
@@ -362,12 +370,12 @@ public class Clinicas implements Serializable {
     }
 
     @XmlTransient
-    public List<CompaniasDeSeguros> getCompaniasDeSegurosList() {
-        return companiasDeSegurosList;
+    public List<EstratosSociales> getEstratosSocialesList() {
+        return estratosSocialesList;
     }
 
-    public void setCompaniasDeSegurosList(List<CompaniasDeSeguros> companiasDeSegurosList) {
-        this.companiasDeSegurosList = companiasDeSegurosList;
+    public void setEstratosSocialesList(List<EstratosSociales> estratosSocialesList) {
+        this.estratosSocialesList = estratosSocialesList;
     }
 
     @XmlTransient
@@ -380,12 +388,39 @@ public class Clinicas implements Serializable {
     }
 
     @XmlTransient
+    public List<Pacientes> getPacientesList() {
+        return pacientesList;
+    }
+
+    public void setPacientesList(List<Pacientes> pacientesList) {
+        this.pacientesList = pacientesList;
+    }
+
+    @XmlTransient
+    public List<Comisiones> getComisionesList() {
+        return comisionesList;
+    }
+
+    public void setComisionesList(List<Comisiones> comisionesList) {
+        this.comisionesList = comisionesList;
+    }
+
+    @XmlTransient
     public List<Convenios> getConveniosList() {
         return conveniosList;
     }
 
     public void setConveniosList(List<Convenios> conveniosList) {
         this.conveniosList = conveniosList;
+    }
+
+    @XmlTransient
+    public List<Profesionales> getProfesionalesList() {
+        return profesionalesList;
+    }
+
+    public void setProfesionalesList(List<Profesionales> profesionalesList) {
+        this.profesionalesList = profesionalesList;
     }
 
     @XmlTransient
@@ -413,6 +448,15 @@ public class Clinicas implements Serializable {
 
     public void setModulosClinicasList(List<ModulosClinicas> modulosClinicasList) {
         this.modulosClinicasList = modulosClinicasList;
+    }
+
+    @XmlTransient
+    public List<RelProcedimientosConvenios> getRelProcedimientosConveniosList() {
+        return relProcedimientosConveniosList;
+    }
+
+    public void setRelProcedimientosConveniosList(List<RelProcedimientosConvenios> relProcedimientosConveniosList) {
+        this.relProcedimientosConveniosList = relProcedimientosConveniosList;
     }
 
     @XmlTransient
