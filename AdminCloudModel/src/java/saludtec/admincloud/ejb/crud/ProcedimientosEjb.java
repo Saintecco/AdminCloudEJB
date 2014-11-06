@@ -6,7 +6,9 @@
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
+import saludtec.admincloud.ejb.entidades.CategoriasProcedimientos;
 import saludtec.admincloud.ejb.entidades.Clinicas;
+import saludtec.admincloud.ejb.entidades.Convenios;
 import saludtec.admincloud.ejb.entidades.Procedimientos;
 
 /**
@@ -25,7 +27,8 @@ public interface ProcedimientosEjb {
 
     Procedimientos traer(String cups, Clinicas clinica);
 
-
-List<Procedimientos> listar(Clinicas clinica);
+    List<Procedimientos> listar(Clinicas clinica);
+    
+    List<Procedimientos> listar(CategoriasProcedimientos categoriaProcedimeinto);
     
 }

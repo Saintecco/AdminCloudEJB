@@ -10,8 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import saludtec.admincloud.ejb.entidades.CategoriasProcedimientos;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.Procedimientos;
 import saludtec.admincloud.ejb.entidades.Procedimientos;
 
 /**
@@ -97,6 +97,22 @@ public class ProcedimientosImpl implements ProcedimientosEjb {
                     + "ORDER BY p.procedimiento";
             Query query = em.createQuery(queryStr);
             query.setParameter("idClinica", clinica);
+
+            return query.getResultList();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Procedimientos> listar(CategoriasProcedimientos categoriaProcedimeinto) {
+        try {
+            String queryStr = "SELECT p FROM Procedimientos p "
+                    + "WHERE p.idCategoriaProcedimiento = :idCategoriaProcedimiento "
+                    + "ORDER BY p.procedimiento";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("idCategoriaProcedimiento", categoriaProcedimeinto);
 
             return query.getResultList();
         } catch (Exception ex) {

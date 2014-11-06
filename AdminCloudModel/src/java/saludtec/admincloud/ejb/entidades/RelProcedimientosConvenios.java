@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "RelProcedimientosConvenios.findAll", query = "SELECT r FROM RelProcedimientosConvenios r"),
     @NamedQuery(name = "RelProcedimientosConvenios.findByIdRelProcedimientoConvenio", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.idRelProcedimientoConvenio = :idRelProcedimientoConvenio"),
+    @NamedQuery(name = "RelProcedimientosConvenios.findByTipoDescuento", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.tipoDescuento = :tipoDescuento"),
+    @NamedQuery(name = "RelProcedimientosConvenios.findByValorDescuento", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.valorDescuento = :valorDescuento"),
+    @NamedQuery(name = "RelProcedimientosConvenios.findByTotal", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.total = :total"),
     @NamedQuery(name = "RelProcedimientosConvenios.findByFechaCreacion", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "RelProcedimientosConvenios.findByUltimaEdicion", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.ultimaEdicion = :ultimaEdicion"),
     @NamedQuery(name = "RelProcedimientosConvenios.findByEstado", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.estado = :estado")})
@@ -46,6 +49,14 @@ public class RelProcedimientosConvenios implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_rel_procedimiento_convenio")
     private Integer idRelProcedimientoConvenio;
+    @Size(max = 100)
+    @Column(name = "tipo_descuento")
+    private String tipoDescuento;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "valor_descuento")
+    private Double valorDescuento;
+    @Column(name = "total")
+    private Double total;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -91,6 +102,30 @@ public class RelProcedimientosConvenios implements Serializable {
 
     public void setIdRelProcedimientoConvenio(Integer idRelProcedimientoConvenio) {
         this.idRelProcedimientoConvenio = idRelProcedimientoConvenio;
+    }
+
+    public String getTipoDescuento() {
+        return tipoDescuento;
+    }
+
+    public void setTipoDescuento(String tipoDescuento) {
+        this.tipoDescuento = tipoDescuento;
+    }
+
+    public Double getValorDescuento() {
+        return valorDescuento;
+    }
+
+    public void setValorDescuento(Double valorDescuento) {
+        this.valorDescuento = valorDescuento;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public Date getFechaCreacion() {
