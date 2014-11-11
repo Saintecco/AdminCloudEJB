@@ -8,7 +8,9 @@ package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,12 +22,14 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -223,6 +227,8 @@ public class Pacientes implements Serializable {
     @JoinColumn(name = "id_tipo_de_documento", referencedColumnName = "id_tipo_de_documento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TiposDeDocumentos idTipoDeDocumento;
+    @OneToMany(mappedBy = "idPaciente", fetch = FetchType.LAZY)
+    private List<Facturas> facturasList;
 
     public Pacientes() {
     }
@@ -563,6 +569,15 @@ public class Pacientes implements Serializable {
 
     public void setIdTipoDeDocumento(TiposDeDocumentos idTipoDeDocumento) {
         this.idTipoDeDocumento = idTipoDeDocumento;
+    }
+
+    @XmlTransient
+    public List<Facturas> getFacturasList() {
+        return facturasList;
+    }
+
+    public void setFacturasList(List<Facturas> facturasList) {
+        this.facturasList = facturasList;
     }
 
     @Override

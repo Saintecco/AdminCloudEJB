@@ -74,7 +74,7 @@ public class EstratosSociales implements Serializable {
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstratoSocial", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idEstratoSocial", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
 
     public EstratosSociales() {

@@ -12,33 +12,33 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import saludtec.admincloud.ejb.entidades.Convenios;
 import saludtec.admincloud.ejb.entidades.Procedimientos;
-import saludtec.admincloud.ejb.entidades.RelProcedimientosConvenios;
+import saludtec.admincloud.ejb.entidades.ConveniosProcedimientos;
 
 /**
  *
  * @author saintec
  */
 @Stateless
-public class RelProcedimientosConveniosImpl implements RelProcedimientosConveniosEjb {
+public class ConveniosProcedimientosImpl implements ConveniosProcedimientosEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public RelProcedimientosConvenios guardar(RelProcedimientosConvenios relProcedimientoConvenio) {
+    public ConveniosProcedimientos guardar(ConveniosProcedimientos convenioProcedimiento) {
         try {
-            em.persist(relProcedimientoConvenio);
-            return relProcedimientoConvenio;
+            em.persist(convenioProcedimiento);
+            return convenioProcedimiento;
         } catch (Exception e) {
             return null;
         }
     }
 
     @Override
-    public RelProcedimientosConvenios editar(RelProcedimientosConvenios relProcedimientoConvenio) {
+    public ConveniosProcedimientos editar(ConveniosProcedimientos convenioProcedimiento) {
         try {
-            em.merge(relProcedimientoConvenio);
-            return relProcedimientoConvenio;
+            em.merge(convenioProcedimiento);
+            return convenioProcedimiento;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -46,12 +46,12 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
     }
 
     @Override
-    public Integer eliminar(Integer idRelProcedimientoConvenio) {
+    public Integer eliminar(Integer idConvenioProcedimiento) {
         Integer ok = 0;
         try {
-            RelProcedimientosConvenios relProcedimientoConvenio = em.find(RelProcedimientosConvenios.class, idRelProcedimientoConvenio);
-            if (relProcedimientoConvenio != null) {
-                em.remove(relProcedimientoConvenio);
+            ConveniosProcedimientos convenioProcedimiento = em.find(ConveniosProcedimientos.class, idConvenioProcedimiento);
+            if (convenioProcedimiento != null) {
+                em.remove(convenioProcedimiento);
                 ok = 200;
             }
         } catch (Exception ex) {
@@ -61,9 +61,9 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
     }
 
     @Override
-    public RelProcedimientosConvenios traer(Integer idRelProcedimientoConvenio) {
+    public ConveniosProcedimientos traer(Integer idConvenioProcedimiento) {
         try {
-            return em.find(RelProcedimientosConvenios.class, idRelProcedimientoConvenio);
+            return em.find(ConveniosProcedimientos.class, idConvenioProcedimiento);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -71,11 +71,11 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
     }
 
     @Override
-    public List<RelProcedimientosConvenios> listar(Convenios convenio) {
+    public List<ConveniosProcedimientos> listar(Convenios convenio) {
         try {
-            String queryStr = "SELECT r FROM RelProcedimientosConvenios r "
-                    + "INNER JOIN r.idProcedimiento p"
-                    + "WHERE r.idConvenio = :idConvenio "
+            String queryStr = "SELECT c FROM ConveniosProcedimientos c "
+                    + "INNER JOIN c.idProcedimiento p"
+                    + "WHERE c.idConvenio = :idConvenio "
                     + "ORDER BY p.procedimiento";
             Query query = em.createQuery(queryStr);
             query.setParameter("idConvenio", convenio);
@@ -88,15 +88,15 @@ public class RelProcedimientosConveniosImpl implements RelProcedimientosConvenio
     }
 
     @Override
-    public RelProcedimientosConvenios traer(Convenios convenio, Procedimientos procedimiento) {
+    public ConveniosProcedimientos traer(Convenios convenio, Procedimientos procedimiento) {
         try {
-            String queryStr = "SELECT r FROM RelProcedimientosConvenios r "
-                    + "WHERE r.idConvenio = :idConvenio "
-                    + "AND r.idProcedimiento = :idProcedimiento";
+            String queryStr = "SELECT c FROM ConveniosProcedimientos c "
+                    + "WHERE c.idConvenio = :idConvenio "
+                    + "AND c.idProcedimiento = :idProcedimiento";
             Query query = em.createQuery(queryStr);
             query.setParameter("idConvenio", convenio);
             query.setParameter("idProcedimiento", procedimiento);
-            List<RelProcedimientosConvenios> rpc = query.getResultList();
+            List<ConveniosProcedimientos> rpc = query.getResultList();
             return rpc.get(0);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

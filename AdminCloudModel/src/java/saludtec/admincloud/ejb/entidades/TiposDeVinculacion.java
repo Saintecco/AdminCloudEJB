@@ -74,7 +74,7 @@ public class TiposDeVinculacion implements Serializable {
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoDeVinculacion", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idTipoDeVinculacion", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
 
     public TiposDeVinculacion() {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
@@ -52,8 +51,9 @@ public class CategoriasProcedimientosImpl implements CategoriasProcedimientosEjb
             CategoriasProcedimientos categoriaProcedimientos = em.find(CategoriasProcedimientos.class, idCategoriaProcedimiento);
             if (categoriaProcedimientos != null) {
                 em.remove(categoriaProcedimientos);
-                ok = 200;
+
             }
+            ok = 200;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }

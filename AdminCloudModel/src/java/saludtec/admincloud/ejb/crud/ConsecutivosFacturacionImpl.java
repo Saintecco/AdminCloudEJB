@@ -3,32 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package saludtec.admincloud.ejb.crud;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.TiposDeDocumentos;
+import saludtec.admincloud.ejb.entidades.ConsecutivosFacturacion;
 
 /**
  *
  * @author saintec
  */
 @Stateless
-public class TiposDocumentosImpl implements TiposDocumentosEjb {
+public class ConsecutivosFacturacionImpl implements ConsecutivosFacturacionEjb {
 
     @PersistenceContext(unitName = "AdminCloudModelPU")
     EntityManager em;
 
     @Override
-    public TiposDeDocumentos guardar(TiposDeDocumentos tipoDocumento) {
+    public ConsecutivosFacturacion guardar(ConsecutivosFacturacion consecutivoFacturacion) {
         try {
-            em.persist(tipoDocumento);
-            return tipoDocumento;
+            em.persist(consecutivoFacturacion);
+            return consecutivoFacturacion;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -36,10 +35,10 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public TiposDeDocumentos editar(TiposDeDocumentos tipoDocumento) {
+    public ConsecutivosFacturacion editar(ConsecutivosFacturacion consecutivoFacturacion) {
         try {
-            em.merge(tipoDocumento);
-            return tipoDocumento;
+            em.merge(consecutivoFacturacion);
+            return consecutivoFacturacion;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -47,12 +46,12 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public Integer eliminar(Integer idTipoDocumento) {
+    public Integer eliminar(Integer idConsecutivoFacturacion) {
         Integer ok = 0;
         try {
-            TiposDeDocumentos tipoDocumentos = em.find(TiposDeDocumentos.class, idTipoDocumento);
-            if (tipoDocumentos != null) {
-                em.remove(tipoDocumentos);
+            ConsecutivosFacturacion consecutivoFacturacions = em.find(ConsecutivosFacturacion.class, idConsecutivoFacturacion);
+            if (consecutivoFacturacions != null) {
+                em.remove(consecutivoFacturacions);
                 ok = 200;
             }
         } catch (Exception ex) {
@@ -62,9 +61,9 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public TiposDeDocumentos traer(Integer idTipoDocumento) {
+    public ConsecutivosFacturacion traer(Integer idConsecutivoFacturacion) {
         try {
-            return em.find(TiposDeDocumentos.class, idTipoDocumento);
+            return em.find(ConsecutivosFacturacion.class, idConsecutivoFacturacion);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             return null;
@@ -72,11 +71,11 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
     }
 
     @Override
-    public List<TiposDeDocumentos> listar(Clinicas clinica) {
+    public List<ConsecutivosFacturacion> listar(Clinicas clinica) {
         try {
-            String queryStr = "SELECT t FROM TiposDeDocumentos t "
-                    + "WHERE t.idClinica = :idClinica "
-                    + "ORDER BY t.tipoDeDocumento";
+            String queryStr = "SELECT c FROM ConsecutivosFacturacion t "
+                    + "WHERE c.idClinica = :idClinica "
+                    + "ORDER BY c.idConsecutivoFacturacion";
             Query query = em.createQuery(queryStr);
             query.setParameter("idClinica", clinica);
             return query.getResultList();
@@ -84,11 +83,6 @@ public class TiposDocumentosImpl implements TiposDocumentosEjb {
             System.err.println(ex.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public String listarr() {
-        return "mensaje del ejb";
     }
 
 }

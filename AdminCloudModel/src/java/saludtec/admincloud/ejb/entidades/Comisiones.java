@@ -8,6 +8,7 @@ package saludtec.admincloud.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -84,6 +87,8 @@ public class Comisiones implements Serializable {
     @JoinColumn(name = "id_procedimiento", referencedColumnName = "id_procedimiento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Procedimientos idProcedimiento;
+    @OneToMany(mappedBy = "idComision", fetch = FetchType.LAZY)
+    private List<DescripcionFacturas> descripcionFacturasList;
 
     public Comisiones() {
     }
@@ -180,6 +185,15 @@ public class Comisiones implements Serializable {
 
     public void setIdProcedimiento(Procedimientos idProcedimiento) {
         this.idProcedimiento = idProcedimiento;
+    }
+
+    @XmlTransient
+    public List<DescripcionFacturas> getDescripcionFacturasList() {
+        return descripcionFacturasList;
+    }
+
+    public void setDescripcionFacturasList(List<DescripcionFacturas> descripcionFacturasList) {
+        this.descripcionFacturasList = descripcionFacturasList;
     }
 
     @Override

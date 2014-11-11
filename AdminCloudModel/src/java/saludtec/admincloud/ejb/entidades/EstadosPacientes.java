@@ -71,7 +71,7 @@ public class EstadosPacientes implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstadoPaciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idEstadoPaciente", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

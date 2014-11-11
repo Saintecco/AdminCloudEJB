@@ -77,11 +77,13 @@ public class Convenios implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
+    @OneToMany(mappedBy = "idConvenio", fetch = FetchType.LAZY)
+    private List<ConveniosProcedimientos> conveniosProcedimientosList;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConvenio", fetch = FetchType.LAZY)
-    private List<RelProcedimientosConvenios> relProcedimientosConveniosList;
+    @OneToMany(mappedBy = "idConvenio", fetch = FetchType.LAZY)
+    private List<DescripcionFacturas> descripcionFacturasList;
 
     public Convenios() {
     }
@@ -147,6 +149,15 @@ public class Convenios implements Serializable {
         this.estado = estado;
     }
 
+    @XmlTransient
+    public List<ConveniosProcedimientos> getConveniosProcedimientosList() {
+        return conveniosProcedimientosList;
+    }
+
+    public void setConveniosProcedimientosList(List<ConveniosProcedimientos> conveniosProcedimientosList) {
+        this.conveniosProcedimientosList = conveniosProcedimientosList;
+    }
+
     public Clinicas getIdClinica() {
         return idClinica;
     }
@@ -156,12 +167,12 @@ public class Convenios implements Serializable {
     }
 
     @XmlTransient
-    public List<RelProcedimientosConvenios> getRelProcedimientosConveniosList() {
-        return relProcedimientosConveniosList;
+    public List<DescripcionFacturas> getDescripcionFacturasList() {
+        return descripcionFacturasList;
     }
 
-    public void setRelProcedimientosConveniosList(List<RelProcedimientosConvenios> relProcedimientosConveniosList) {
-        this.relProcedimientosConveniosList = relProcedimientosConveniosList;
+    public void setDescripcionFacturasList(List<DescripcionFacturas> descripcionFacturasList) {
+        this.descripcionFacturasList = descripcionFacturasList;
     }
 
     @Override

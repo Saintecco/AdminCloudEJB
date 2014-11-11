@@ -71,7 +71,7 @@ public class CategoriasProcedimientos implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoriaProcedimiento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idCategoriaProcedimiento", fetch = FetchType.LAZY)
     private List<Procedimientos> procedimientosList;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

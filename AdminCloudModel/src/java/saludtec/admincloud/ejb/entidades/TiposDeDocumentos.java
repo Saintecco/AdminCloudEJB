@@ -73,9 +73,9 @@ public class TiposDeDocumentos implements Serializable {
     private String estado;
     @OneToMany(mappedBy = "idTipoDeDocumentoAcudiente", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoDeDocumento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idTipoDeDocumento", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoDeDocumento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idTipoDeDocumento", fetch = FetchType.LAZY)
     private List<Profesionales> profesionalesList;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

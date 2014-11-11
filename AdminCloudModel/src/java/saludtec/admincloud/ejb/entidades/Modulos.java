@@ -58,7 +58,7 @@ public class Modulos implements Serializable {
     @Size(max = 100)
     @Column(name = "icono")
     private String icono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idModulo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idModulo", fetch = FetchType.LAZY)
     private List<ModulosClinicas> modulosClinicasList;
 
     public Modulos() {

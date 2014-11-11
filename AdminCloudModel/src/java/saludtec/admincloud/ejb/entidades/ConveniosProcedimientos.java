@@ -31,32 +31,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saintec
  */
 @Entity
-@Table(name = "rel_procedimientos_convenios")
+@Table(name = "convenios_procedimientos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RelProcedimientosConvenios.findAll", query = "SELECT r FROM RelProcedimientosConvenios r"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByIdRelProcedimientoConvenio", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.idRelProcedimientoConvenio = :idRelProcedimientoConvenio"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByTipoDescuento", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.tipoDescuento = :tipoDescuento"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByValorDescuento", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.valorDescuento = :valorDescuento"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByTotal", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.total = :total"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByFechaCreacion", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByUltimaEdicion", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.ultimaEdicion = :ultimaEdicion"),
-    @NamedQuery(name = "RelProcedimientosConvenios.findByEstado", query = "SELECT r FROM RelProcedimientosConvenios r WHERE r.estado = :estado")})
-public class RelProcedimientosConvenios implements Serializable {
+    @NamedQuery(name = "ConveniosProcedimientos.findAll", query = "SELECT c FROM ConveniosProcedimientos c"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByIdConvenioProcedimiento", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.idConvenioProcedimiento = :idConvenioProcedimiento"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByTipoDescuento", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.tipoDescuento = :tipoDescuento"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByValorDescuento", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.valorDescuento = :valorDescuento"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByTotal", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.total = :total"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByFechaCreacion", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByUltimaEdicion", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.ultimaEdicion = :ultimaEdicion"),
+    @NamedQuery(name = "ConveniosProcedimientos.findByEstado", query = "SELECT c FROM ConveniosProcedimientos c WHERE c.estado = :estado")})
+public class ConveniosProcedimientos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_rel_procedimiento_convenio")
-    private Integer idRelProcedimientoConvenio;
-    @Size(max = 100)
+    @Column(name = "id_convenio_procedimiento")
+    private Integer idConvenioProcedimiento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "tipo_descuento")
     private String tipoDescuento;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "valor_descuento")
-    private Double valorDescuento;
+    private double valorDescuento;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "total")
-    private Double total;
+    private double total;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -82,26 +87,29 @@ public class RelProcedimientosConvenios implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Convenios idConvenio;
 
-    public RelProcedimientosConvenios() {
+    public ConveniosProcedimientos() {
     }
 
-    public RelProcedimientosConvenios(Integer idRelProcedimientoConvenio) {
-        this.idRelProcedimientoConvenio = idRelProcedimientoConvenio;
+    public ConveniosProcedimientos(Integer idConvenioProcedimiento) {
+        this.idConvenioProcedimiento = idConvenioProcedimiento;
     }
 
-    public RelProcedimientosConvenios(Integer idRelProcedimientoConvenio, Date fechaCreacion, Date ultimaEdicion, String estado) {
-        this.idRelProcedimientoConvenio = idRelProcedimientoConvenio;
+    public ConveniosProcedimientos(Integer idConvenioProcedimiento, String tipoDescuento, double valorDescuento, double total, Date fechaCreacion, Date ultimaEdicion, String estado) {
+        this.idConvenioProcedimiento = idConvenioProcedimiento;
+        this.tipoDescuento = tipoDescuento;
+        this.valorDescuento = valorDescuento;
+        this.total = total;
         this.fechaCreacion = fechaCreacion;
         this.ultimaEdicion = ultimaEdicion;
         this.estado = estado;
     }
 
-    public Integer getIdRelProcedimientoConvenio() {
-        return idRelProcedimientoConvenio;
+    public Integer getIdConvenioProcedimiento() {
+        return idConvenioProcedimiento;
     }
 
-    public void setIdRelProcedimientoConvenio(Integer idRelProcedimientoConvenio) {
-        this.idRelProcedimientoConvenio = idRelProcedimientoConvenio;
+    public void setIdConvenioProcedimiento(Integer idConvenioProcedimiento) {
+        this.idConvenioProcedimiento = idConvenioProcedimiento;
     }
 
     public String getTipoDescuento() {
@@ -112,19 +120,19 @@ public class RelProcedimientosConvenios implements Serializable {
         this.tipoDescuento = tipoDescuento;
     }
 
-    public Double getValorDescuento() {
+    public double getValorDescuento() {
         return valorDescuento;
     }
 
-    public void setValorDescuento(Double valorDescuento) {
+    public void setValorDescuento(double valorDescuento) {
         this.valorDescuento = valorDescuento;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -179,18 +187,18 @@ public class RelProcedimientosConvenios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRelProcedimientoConvenio != null ? idRelProcedimientoConvenio.hashCode() : 0);
+        hash += (idConvenioProcedimiento != null ? idConvenioProcedimiento.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RelProcedimientosConvenios)) {
+        if (!(object instanceof ConveniosProcedimientos)) {
             return false;
         }
-        RelProcedimientosConvenios other = (RelProcedimientosConvenios) object;
-        if ((this.idRelProcedimientoConvenio == null && other.idRelProcedimientoConvenio != null) || (this.idRelProcedimientoConvenio != null && !this.idRelProcedimientoConvenio.equals(other.idRelProcedimientoConvenio))) {
+        ConveniosProcedimientos other = (ConveniosProcedimientos) object;
+        if ((this.idConvenioProcedimiento == null && other.idConvenioProcedimiento != null) || (this.idConvenioProcedimiento != null && !this.idConvenioProcedimiento.equals(other.idConvenioProcedimiento))) {
             return false;
         }
         return true;
@@ -198,7 +206,7 @@ public class RelProcedimientosConvenios implements Serializable {
 
     @Override
     public String toString() {
-        return "saludtec.admincloud.ejb.entidades.RelProcedimientosConvenios[ idRelProcedimientoConvenio=" + idRelProcedimientoConvenio + " ]";
+        return "saludtec.admincloud.ejb.entidades.ConveniosProcedimientos[ idConvenioProcedimiento=" + idConvenioProcedimiento + " ]";
     }
     
 }

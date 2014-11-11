@@ -98,7 +98,7 @@ public class Profesionales implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfesional", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idProfesional", fetch = FetchType.LAZY)
     private List<Comisiones> comisionesList;
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -106,6 +106,8 @@ public class Profesionales implements Serializable {
     @JoinColumn(name = "id_tipo_de_documento", referencedColumnName = "id_tipo_de_documento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TiposDeDocumentos idTipoDeDocumento;
+    @OneToMany(mappedBy = "idProfesional", fetch = FetchType.LAZY)
+    private List<DescripcionFacturas> descripcionFacturasList;
 
     public Profesionales() {
     }
@@ -228,6 +230,15 @@ public class Profesionales implements Serializable {
 
     public void setIdTipoDeDocumento(TiposDeDocumentos idTipoDeDocumento) {
         this.idTipoDeDocumento = idTipoDeDocumento;
+    }
+
+    @XmlTransient
+    public List<DescripcionFacturas> getDescripcionFacturasList() {
+        return descripcionFacturasList;
+    }
+
+    public void setDescripcionFacturasList(List<DescripcionFacturas> descripcionFacturasList) {
+        this.descripcionFacturasList = descripcionFacturasList;
     }
 
     @Override

@@ -69,7 +69,7 @@ public class Razas implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRaza", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idRaza", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
 
     public Razas() {

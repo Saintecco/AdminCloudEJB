@@ -114,10 +114,12 @@ public class Procedimientos implements Serializable {
     @JoinColumn(name = "id_categoria_procedimiento", referencedColumnName = "id_categoria_procedimiento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoriasProcedimientos idCategoriaProcedimiento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProcedimiento", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "idProcedimiento", fetch = FetchType.LAZY)
     private List<Comisiones> comisionesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProcedimiento", fetch = FetchType.LAZY)
-    private List<RelProcedimientosConvenios> relProcedimientosConveniosList;
+    @OneToMany(mappedBy = "idProcedimiento", fetch = FetchType.LAZY)
+    private List<ConveniosProcedimientos> conveniosProcedimientosList;
+    @OneToMany(mappedBy = "idProcedimiento", fetch = FetchType.LAZY)
+    private List<DescripcionFacturas> descripcionFacturasList;
 
     public Procedimientos() {
     }
@@ -263,12 +265,21 @@ public class Procedimientos implements Serializable {
     }
 
     @XmlTransient
-    public List<RelProcedimientosConvenios> getRelProcedimientosConveniosList() {
-        return relProcedimientosConveniosList;
+    public List<ConveniosProcedimientos> getConveniosProcedimientosList() {
+        return conveniosProcedimientosList;
     }
 
-    public void setRelProcedimientosConveniosList(List<RelProcedimientosConvenios> relProcedimientosConveniosList) {
-        this.relProcedimientosConveniosList = relProcedimientosConveniosList;
+    public void setConveniosProcedimientosList(List<ConveniosProcedimientos> conveniosProcedimientosList) {
+        this.conveniosProcedimientosList = conveniosProcedimientosList;
+    }
+
+    @XmlTransient
+    public List<DescripcionFacturas> getDescripcionFacturasList() {
+        return descripcionFacturasList;
+    }
+
+    public void setDescripcionFacturasList(List<DescripcionFacturas> descripcionFacturasList) {
+        this.descripcionFacturasList = descripcionFacturasList;
     }
 
     @Override

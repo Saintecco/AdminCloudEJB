@@ -78,7 +78,7 @@ public class CompaniasDeSeguros implements Serializable {
     @JoinColumn(name = "id_clinica", referencedColumnName = "id_clinica")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clinicas idClinica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompaniaDeSeguro", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idCompaniaDeSeguro", fetch = FetchType.LAZY)
     private List<Pacientes> pacientesList;
 
     public CompaniasDeSeguros() {
