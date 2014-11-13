@@ -10,8 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import saludtec.admincloud.ejb.entidades.Clinicas;
-import saludtec.admincloud.ejb.entidades.Comisiones;
 import saludtec.admincloud.ejb.entidades.Procedimientos;
 import saludtec.admincloud.ejb.entidades.Profesionales;
 import saludtec.admincloud.ejb.entidades.Comisiones;
@@ -93,7 +91,7 @@ public class ComisionesImpl implements ComisionesEjb {
     public List<Comisiones> listar(Profesionales profesional) {
         try {
             String queryStr = "SELECT c FROM Comisiones c "
-                    + "INNER JOIN c.idProcedimiento p"
+                    + "INNER JOIN c.idProcedimiento p "
                     + "WHERE c.idProfesional = :idProfesional "
                     + "ORDER BY p.procedimiento";
             Query query = em.createQuery(queryStr);

@@ -71,6 +71,24 @@ public class ProfesionalesImpl implements ProfesionalesEjb {
     }
 
     @Override
+    public Profesionales traer(String numeroDocumento, Clinicas clinica) {
+        try {
+            String queryStr = "SELECT p FROM Profesionales p "
+                    + "WHERE p.numeroDeDocumento = :numeroDeDocumento "
+                    + "AND p.idClinica = :idClinica "
+                    + "ORDER BY p.nombre";
+            Query query = em.createQuery(queryStr);
+            query.setParameter("numeroDeDocumento", numeroDocumento);
+            query.setParameter("idClinica", clinica);
+            List<Profesionales> profesional = query.getResultList();
+            return profesional.get(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
     public List<Profesionales> listar(Clinicas clinica) {
         try {
             String queryStr = "SELECT p FROM Profesionales p "

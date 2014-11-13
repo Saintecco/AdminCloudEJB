@@ -74,7 +74,7 @@ public class ConveniosProcedimientosImpl implements ConveniosProcedimientosEjb {
     public List<ConveniosProcedimientos> listar(Convenios convenio) {
         try {
             String queryStr = "SELECT c FROM ConveniosProcedimientos c "
-                    + "INNER JOIN c.idProcedimiento p"
+                    + "INNER JOIN c.idProcedimiento p "
                     + "WHERE c.idConvenio = :idConvenio "
                     + "ORDER BY p.procedimiento";
             Query query = em.createQuery(queryStr);

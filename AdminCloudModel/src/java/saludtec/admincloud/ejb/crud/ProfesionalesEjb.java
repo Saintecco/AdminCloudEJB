@@ -23,6 +23,8 @@ public interface ProfesionalesEjb {
     Integer eliminar(Integer idProfesional);
 
     Profesionales traer(Integer idProfesional);
+    
+    Profesionales traer(String numeroDocumento, Clinicas clinica);
 
     List<Profesionales> listar(Clinicas clinica);
     
